@@ -4,5 +4,4 @@ Inlämningsuppgift till grundläggande java
 GitKraken test
 ...
 Github pull test
-=======
->>>>>>> parent of 36f21d8... Test change
+Github conflict test
