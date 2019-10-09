@@ -75,7 +75,7 @@ public class DungeonProgram {
             System.out.println("7. Show monsters sorted");
             System.out.println("8. Save or load monsters");
             System.out.println("9. Help");
-            System.out.println("10. Enter dungeon as hero");
+            System.out.println("10. Allow enemy (hero) to enter the dungeon");
             System.out.println("11. Exit");
             System.out.println("----------------------------------------------");
             menu = tryCatchInt();
@@ -108,6 +108,7 @@ public class DungeonProgram {
                     help();
                     break;
                 case 10:
+                    enterDungeon();
                     break;
                 case 11:
                     exit();
@@ -453,7 +454,7 @@ public class DungeonProgram {
         System.out.println("Enter hero level: ");
         hero = new Hero("Awesome", "Hero",tryCatchInt());
         while (hero.getHealth() > 0){
-            
+
         }
     }
 
