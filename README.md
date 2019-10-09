@@ -1,8 +1,8 @@
 # BigProject
 Inlämningsuppgift till grundläggande java
 
-GitKraken test
-...
-Github pull test
-GitKraken conflict test
-Github conflict test
+Dungeon simulator:
+
+Create monsters
+Add loot/treasure
+View monsters' attributes
