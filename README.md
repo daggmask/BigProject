@@ -1,18 +1,5 @@
 # BigProject
-Inlämningsuppgift till grundläggande java
+Assignment for Java
 
-        adds a monster to the dungeon
-       
-        adds loot to the dungeon
-        
-        removes a monster from the dungeon
-        
-        removes loot from the dungeon
-        
-        shows monsters from chosen list option
-        
-        shows all the loot in the dungeon
-        
-        sort monsters by their aspects 
-        
-        save or load monsters
+Dungeon simulator, generate monsters, loot, tresure and equipment. View the monsters, view the monster's attributes. 
+Create your hero with gear and fight through your dungeon.
