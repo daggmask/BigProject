@@ -14,7 +14,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     private int health;
     private int mana;
 
-    Monsters(String monsterAffix, String monsterName, int level) {
+    Monsters(MonsterFactory.MonsterAffix monsterAffix, MonsterFactory.MonsterType monsterName, int level) {
         super ( monsterAffix, monsterName );
         this.level = level;
         this.equipment = new ArrayList<> (  );

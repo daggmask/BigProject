@@ -7,6 +7,7 @@ import static java.lang.Thread.sleep;
 
 public class DungeonProgram {
     private Scanner scan = new Scanner(System.in);
+    private Random rand = new Random();
     private ArrayList<DungeonMaster> dungeonMasters = new ArrayList<>();
     private ArrayList<LootOrTreasures> lootOrTreasures = new ArrayList<>();
     private ArrayList<Monsters> monsters = new ArrayList<>();
@@ -126,7 +127,7 @@ public class DungeonProgram {
         if (monsters.size() < MAX_MONSTERS) {
             System.out.println("Enter the affix, name and level of the monster");
             System.out.println("For example: Furious Goblin 13");
-            Monsters monster = new Monsters(tryCatchString(), tryCatchString(), tryCatchInt());
+            Monsters monster = new Monsters(rand.nextInt(MonsterFactory.MonsterAffix.values().length), tryCatchString(), tryCatchInt());
             System.out.println("How many items do you want the monster to have?");
             int amountOfItems = tryCatchInt();
             if (amountOfItems > 0) {
