@@ -10,6 +10,7 @@ public class DungeonProgram {
     private ArrayList<DungeonMaster> dungeonMasters = new ArrayList<>();
     private ArrayList<LootOrTreasures> lootOrTreasures = new ArrayList<>();
     private ArrayList<Monsters> monsters = new ArrayList<>();
+    private Hero hero;
     private final static int MAX_MONSTERS = 30;
     private final static int MAX_LOOT = 20;
     private final static int MAX_EQUIPMENT = 20;
@@ -74,7 +75,8 @@ public class DungeonProgram {
             System.out.println("7. Show monsters sorted");
             System.out.println("8. Save or load monsters");
             System.out.println("9. Help");
-            System.out.println("10. Exit");
+            System.out.println("10. Enter dungeon as hero");
+            System.out.println("11. Exit");
             System.out.println("----------------------------------------------");
             menu = tryCatchInt();
             switch (menu) {
@@ -106,13 +108,14 @@ public class DungeonProgram {
                     help();
                     break;
                 case 10:
+                    break;
+                case 11:
                     exit();
                     menu = 0;
                     break;
                 default:
                     System.out.println("Dungeon master, this option does not exist. Please enter existing options");
             }
-
         } while (menu != 0);
 
     }
@@ -441,6 +444,17 @@ public class DungeonProgram {
         System.out.println("Option 6 shows all the loot in the dungeon");
         System.out.println("Option 7 sort monsters by their aspects");
         System.out.println("Option 8 save or load monsters ");
+        System.out.println("Option 9 menu tool tip ");
+        System.out.println("Option 10 battle the dungeon ");
+        System.out.println("Option 11 exit ");
+    }
+
+    private void enterDungeon(){
+        System.out.println("Enter hero level: ");
+        hero = new Hero("Awesome", "Hero",tryCatchInt());
+        while (hero.getHealth() > 0){
+            
+        }
     }
 
     private void exit() {

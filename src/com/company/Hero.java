@@ -14,9 +14,10 @@ public class Hero extends Entity implements Serializable {
     private int health;
     private int mana;
 
-    Hero(String monsterAffix, String monsterName) {
+    Hero(String monsterAffix, String monsterName, int level) {
         super(monsterAffix, monsterName);
-        this.title = " Hero ";
+        this.level = level;
+        this.title = " Super ";
         generateStats();
         recruitedMonster();
     }
