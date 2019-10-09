@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/BigProject.iml" filepath="$PROJECT_DIR$/.idea/BigProject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/DungeonSimulator.iml" filepath="$PROJECT_DIR$/DungeonSimulator.iml" />
     </modules>
   </component>
 </project>
