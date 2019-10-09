@@ -5,3 +5,4 @@ GitKraken test
 ...
 Github pull test
 GitKraken conflict test
+Github conflict test
