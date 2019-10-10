@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Hero extends Entity implements Serializable {
+public class Hero extends HolyEntity implements Serializable {
     private int level;
     private ArrayList<Equipment> equipment;
     private String title;
@@ -14,17 +14,12 @@ public class Hero extends Entity implements Serializable {
     private int health;
     private int mana;
 
-    Hero(String monsterAffix, String monsterName, int level) {
-        super(monsterAffix, monsterName);
+    Hero(String firstName, String lastName, int level) {
+        super(firstName, lastName);
         this.level = level;
         this.title = " Super ";
         generateStats();
-        recruitedMonster();
-    }
-
-    @Override
-    public void recruitedMonster() {
-        System.out.println("Hero has joined the simulation");
+        addedEntity();
     }
     private void generateStats(){
         Random rand = new Random();
@@ -76,5 +71,8 @@ public class Hero extends Entity implements Serializable {
         return mana;
     }
 
-
+    @Override
+    public void addedEntity() {
+        System.out.println("Hero: " + getFirstName() + " " + getLastName() + " has entered the dungeon");
+    }
 }

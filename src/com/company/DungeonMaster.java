@@ -1,14 +1,19 @@
 package com.company;
 
-public class DungeonMaster extends Entity {
+public class DungeonMaster extends HolyEntity {
 
 
-    DungeonMaster(String monsterAffix, String monsterName) {
-        super ( monsterAffix, monsterName );
-        recruitedMonster ();
+    DungeonMaster(String firstName, String lastName) {
+        super(firstName, lastName);
     }
 
-    public void recruitedMonster() {
-        System.out.println ("Welcome Dungeon master: " + getMonsterAffix() + " " + getMonsterName());
+    @Override
+    public void addedEntity() {
+        System.out.println("Welcome dungeon master " + getFirstName() + " " + getLastName());
+    }
+
+    @Override
+    public String toString() {
+        return getFirstName() + " " + getLastName();
     }
 }

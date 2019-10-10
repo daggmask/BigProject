@@ -6,6 +6,7 @@ public abstract class Entity implements Serializable {
    private String monsterAffix;
    private String monsterName;
     public abstract void recruitedMonster();
+
     Entity(MonsterFactory.MonsterAffix monsterAffix, MonsterFactory.MonsterType monsterName){
         this.monsterAffix = monsterAffix.toString();
         this.monsterName = monsterName.toString();

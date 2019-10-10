@@ -15,11 +15,11 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     private int mana;
 
     Monsters(MonsterFactory.MonsterAffix monsterAffix, MonsterFactory.MonsterType monsterName, int level) {
-        super ( monsterAffix, monsterName );
+        super(monsterAffix, monsterName);
         this.level = level;
-        this.equipment = new ArrayList<> (  );
+        this.equipment = new ArrayList<>();
         generateStats();
-        recruitedMonster ();
+        recruitedMonster();
     }
 
     public String getTitle() {
@@ -54,18 +54,25 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         this.title = title;
     }
 
-    public void addEquipment(String items){
-        Equipment gear = new Equipment ( items );
-        equipment.add ( gear );
+    public void addEquipment(String items) {
+        Equipment gear = new Equipment(items);
+        equipment.add(gear);
     }
+
     public void recruitedMonster() {
-        System.out.println (getMonsterAffix() + " " + getMonsterName() + " level " + level + " has been added to your dungeon" );
+        MonsterFactory.MonsterAffix affix = MonsterFactory.getMonsterAffix();
+        MonsterFactory.MonsterType name = MonsterFactory.getMonsterType();
+        if (affix != null && name != null)
+        System.out.println(affix + " " + name + " level " + level + " has been added to your dungeon");
+        else
+            System.out.println("Error");
     }
 
     public ArrayList<Equipment> getEquipment() {
         return equipment;
     }
-    public enum SortBy{
+
+    public enum SortBy {
         TITLE,
         AFFIX,
         LEVEL,
@@ -76,33 +83,32 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         MANA,
         NAME,
     }
+
     private static SortBy sortBy;
 
     public static void setSortBy(SortBy sortBy) {
         Monsters.sortBy = sortBy;
     }
 
-    private void generateStats(){
+    private void generateStats() {
         Random rand = new Random();
-        this.strength = level + rand.nextInt((10 - 1)+1)+1;
-        if (this.strength < 10){
+        this.strength = level + rand.nextInt((10 - 1) + 1) + 1;
+        if (this.strength < 10) {
             this.strength = 10;
         }
-        this.dexterity = level + rand.nextInt((10 - 1)+1)+1;
-        if (this.dexterity < 10){
+        this.dexterity = level + rand.nextInt((10 - 1) + 1) + 1;
+        if (this.dexterity < 10) {
             this.dexterity = 10;
         }
-        this.intelligence = level + rand.nextInt((10 - 1)+1)+1;
-        if (this.intelligence < 10){
+        this.intelligence = level + rand.nextInt((10 - 1) + 1) + 1;
+        if (this.intelligence < 10) {
             this.intelligence = 10;
         }
-        if (strength > dexterity && strength > intelligence){
+        if (strength > dexterity && strength > intelligence) {
             this.title = " Strong ";
-        }
-        else if (dexterity > strength && dexterity > intelligence){
+        } else if (dexterity > strength && dexterity > intelligence) {
             this.title = " Fast ";
-        }
-        else if (intelligence > strength && intelligence > dexterity){
+        } else if (intelligence > strength && intelligence > dexterity) {
             this.title = " Intelligent ";
         }
         this.health = (int) Math.round(strength * (level * 1.5));
@@ -111,7 +117,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
 
     @Override
     public int compareTo(Monsters monsters) {
-        switch (sortBy){
+        switch (sortBy) {
             case TITLE:
                 return getTitle().compareToIgnoreCase(monsters.getTitle());
             case MANA:
@@ -125,16 +131,13 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
             case INTELLIGENCE:
                 return -(intelligence - monsters.getIntelligence());
             case NAME:
-                return getMonsterName().compareToIgnoreCase(monsters.getMonsterName());
+                return MonsterFactory.getMonsterType().toString().compareToIgnoreCase(MonsterFactory.getMonsterType().toString()); // Fix sort
             case AFFIX:
-                return getMonsterAffix().compareToIgnoreCase(monsters.getMonsterAffix());
+                return MonsterFactory.getMonsterAffix().toString().compareToIgnoreCase(MonsterFactory.getMonsterType().toString()); // Fix sort
             case LEVEL:
                 return -(level - monsters.level);
             default:
                 return 0;
         }
-    }
-    public String toString(){
-        return getTitle() + " " + getMonsterAffix() + " " + getMonsterName() + " " + getLevel();
     }
 }

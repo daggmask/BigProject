@@ -125,10 +125,11 @@ public class DungeonProgram {
     private void addMonster() {
         int itemCount = 1;
         if (monsters.size() < MAX_MONSTERS) {
-            System.out.println("Enter the affix, name and level of the monster");
-            System.out.println("For example: Furious Goblin 13");
-            Monsters monster = new Monsters(rand.nextInt(MonsterFactory.MonsterAffix.values().length), tryCatchString(), tryCatchInt());
-            System.out.println("How many items do you want the monster to have?");
+            System.out.println("Enter the  level of the monster");
+            MonsterFactory.MonsterAffix monsterAffix = MonsterFactory.MonsterAffix.values()[rand.nextInt(MonsterFactory.MonsterAffix.values().length)];
+            MonsterFactory.MonsterType monsterType = MonsterFactory.MonsterType.values()[rand.nextInt(MonsterFactory.MonsterType.values().length)];
+            Monsters monster = new Monsters(monsterAffix, monsterType , tryCatchInt());
+            System.out.println("How many items do you want the monster to have?"); //Add random items
             int amountOfItems = tryCatchInt();
             if (amountOfItems > 0) {
                 for (int i = 0; i < amountOfItems && i < MAX_EQUIPMENT; i++) {
@@ -429,7 +430,7 @@ public class DungeonProgram {
             default:
                 for (DungeonMaster dungeonMaster : dungeonMasters) {
                     if (dungeonMaster != null)
-                        System.out.println("This option doesn't exist, " + dungeonMaster.getMonsterAffix() + dungeonMaster.getMonsterName());
+                        System.out.println("This option doesn't exist, " + dungeonMaster.toString());
                     else
                         System.out.println("This option doesn't exist, dungeon master");
                 }
@@ -452,8 +453,8 @@ public class DungeonProgram {
     }
 
     private void enterDungeon(){
-        System.out.println("Enter hero level: ");
-        hero = new Hero("Awesome", "Hero",tryCatchInt());
+        System.out.println("Enter hero first name, last name and  level: ");
+        hero = new Hero(tryCatchString(), tryCatchString(), tryCatchInt());
         while (hero.getHealth() > 0){
 
         }
@@ -462,25 +463,22 @@ public class DungeonProgram {
     private void exit() {
         for (DungeonMaster dungeonMaster : dungeonMasters) {
             if (dungeonMaster != null)
-                System.out.println("Thanks for playing " + dungeonMaster.getMonsterAffix() + " " + dungeonMaster.getMonsterName());
+                System.out.println("Thanks for playing " + dungeonMaster.toString());
             else
                 System.out.println("Thanks for playing");
         }
     }
 
-    private void addFeralMonsters(){
-        monsters.add(new Monsters(" Furious", " Minotaur ", 13));
-        monsters.get(0).addEquipment("No gear due to feral monster");
-        monsters.get(0).setTitle("Feral ");
-        monsters.add(new Monsters(" Weak", " Goblin ", 4));
-        monsters.get(1).addEquipment("No gear due to feral monster");
-        monsters.get(1).setTitle("Feral ");
-        monsters.add(new Monsters(" Fragile", " Spider ", 3));
-        monsters.get(2).addEquipment("No gear due to feral monster");
-        monsters.get(2).setTitle("Feral ");
-        monsters.add(new Monsters(" Defensive", " Skeleton ", 5));
-        monsters.get(3).addEquipment("No gear due to feral monster");
-        monsters.get(3).setTitle("Feral ");
+    private void addFeralMonsters() {
+        int i = 0;
+        while (i < 5) {
+            MonsterFactory.MonsterAffix monsterAffix = MonsterFactory.MonsterAffix.values()[rand.nextInt(MonsterFactory.MonsterAffix.values().length)];
+            MonsterFactory.MonsterType monsterType = MonsterFactory.MonsterType.values()[rand.nextInt(MonsterFactory.MonsterType.values().length)];
+            monsters.add(new Monsters(monsterAffix, monsterType, 13));
+            monsters.get(i).addEquipment("No gear due to feral monster");
+            monsters.get(i).setTitle("Feral ");
+            i++;
+        }
     }
 
     private int tryCatchInt() {
