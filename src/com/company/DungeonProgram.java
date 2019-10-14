@@ -300,7 +300,7 @@ public class DungeonProgram {
                 Collections.sort(monsters);
                 for (Monsters monsters: monsters){
                     if (monsters.getTitle() != null)
-                    System.out.println(monsters.getTitle() +  monsters.getMonsterType() + monsters.getLevel());
+                    System.out.println(monsters.getTitle() + " " +  monsters.getMonsterType()+ " " + monsters.getLevel());
                     else
                         System.out.println("Feral " + monsters.getMonsterType() + monsters.getLevel());
                 }
@@ -310,7 +310,7 @@ public class DungeonProgram {
                 Collections.sort(monsters);
                 for (Monsters monsters: monsters){
                     if (monsters != null)
-                        System.out.println(monsters.getMonsterAffix() + monsters.getMonsterType() + monsters.getLevel());
+                        System.out.println(monsters);
                     else
                         System.out.println("Monsters doesn't exist");
                 }
@@ -320,7 +320,7 @@ public class DungeonProgram {
                 Collections.sort(monsters);
                 for (Monsters monsters: monsters){
                     if (monsters != null)
-                        System.out.println(monsters.getMonsterAffix() + monsters.getMonsterType());
+                        System.out.println(monsters);
                     else
                         System.out.println("Monsters doesn't exist");
                 }
@@ -330,7 +330,7 @@ public class DungeonProgram {
                 Collections.sort(monsters);
                 for (Monsters monsters: monsters){
                     if (monsters != null)
-                        System.out.println(monsters.getMonsterAffix() + monsters.getMonsterType() + monsters.getLevel());
+                        System.out.println(monsters);
                     else
                         System.out.println("Monsters doesn't exist");
                 }
