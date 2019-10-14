@@ -67,17 +67,7 @@ public class DungeonProgram {
             System.out.println("----------------------------------------------");
             System.out.println("Enter your desired option");
             System.out.println("Monster section:");
-            System.out.println("1. Add monster to your dungeon");
-            System.out.println("2. Add loot to your dungeon");
-            System.out.println("3. Remove monster from your dungeon");
-            System.out.println("4. Remove loot from the dungeon");
-            System.out.println("5. Show all monsters in the dungeon");
-            System.out.println("6. Show all loot in the dungeon");
-            System.out.println("7. Show monsters sorted");
-            System.out.println("8. Save or load monsters");
-            System.out.println("9. Help");
-            System.out.println("10. Allow enemy (hero) to enter the dungeon");
-            System.out.println("11. Exit");
+            menus(Menus.MainMenu.values());
             System.out.println("----------------------------------------------");
             menu = tryCatchInt();
             switch (menu) {
@@ -128,7 +118,7 @@ public class DungeonProgram {
             System.out.println("Enter the  level of the monster");
             MonsterFactory.MonsterAffix monsterAffix = MonsterFactory.MonsterAffix.values()[rand.nextInt(MonsterFactory.MonsterAffix.values().length)];
             MonsterFactory.MonsterType monsterType = MonsterFactory.MonsterType.values()[rand.nextInt(MonsterFactory.MonsterType.values().length)];
-            Monsters monster = new Monsters(monsterAffix.monsterAffix, monsterType.monsterType , tryCatchInt());
+            Monsters monster = new Monsters(monsterAffix.monsterAffix, monsterType.monsterType, tryCatchInt());
             System.out.println("How many items do you want the monster to have?"); //Add random items
             int amountOfItems = tryCatchInt();
             if (amountOfItems > 0) {
@@ -185,12 +175,7 @@ public class DungeonProgram {
 
     private void showMonsters() {
         System.out.println("Do you want to see only the monster's names or level too, or affixes too?");
-        System.out.println("1. Only titles and names");
-        System.out.println("2. Only level");
-        System.out.println("3. Only affix");
-        System.out.println("4. All");
-        System.out.println("5. Show monster equipment");
-        System.out.println("6. Show monster stats");
+        menus(Menus.ShowMenu.values());
         int menu2 = tryCatchInt();
         switch (menu2) {
             case 1:
@@ -229,7 +214,7 @@ public class DungeonProgram {
             case 4:
                 for (Monsters monsters : monsters) {
                     if (monsters != null) {
-                        System.out.println( monsters.getTitle() + monsters.getMonsterAffix() + " " + monsters.getMonsterType() + " " + monsters.getLevel());
+                        System.out.println(monsters.getTitle() + monsters.getMonsterAffix() + " " + monsters.getMonsterType() + " " + monsters.getLevel());
                     } else {
                         System.out.println("There's no monsters in the dungeon");
                     }
@@ -260,12 +245,12 @@ public class DungeonProgram {
                 for (Monsters monster : monsters) {
                     if (monster != null) {
                         if (monster == monsters.get(monsterIndex)) {
-                            System.out.println("Showing: "+ monster.getTitle() + monster.getMonsterAffix() + " " + monster.getMonsterType() + " " + monster.getLevel());
+                            System.out.println("Showing: " + monster.getTitle() + monster.getMonsterAffix() + " " + monster.getMonsterType() + " " + monster.getLevel());
                             System.out.println("Strength: " + monster.getStrength());
                             System.out.println("Dexterity: " + monster.getDexterity());
                             System.out.println("Intelligence: " + monster.getIntelligence());
                             System.out.println("Health: " + monster.getHealth());
-                            System.out.println("Mana: " +  monster.getMana());
+                            System.out.println("Mana: " + monster.getMana());
                         }
                     }
                 }
@@ -281,26 +266,19 @@ public class DungeonProgram {
             System.out.println(lootOrTreasures.getLootOrTreasure() + " " + lootOrTreasures.getRarity());
         }
     }
-    private void sortMonsters(){
+
+    private void sortMonsters() {
         int menu = 0;
         System.out.println("Which aspect do you want to sort the monsters by?");
-        System.out.println("1. Title");
-        System.out.println("2. Affix");
-        System.out.println("3. Name");
-        System.out.println("4. Level");
-        System.out.println("5. Strength");
-        System.out.println("6. Dexterity");
-        System.out.println("7. Intelligence");
-        System.out.println("8. Health");
-        System.out.println("9. Mana");
+        menus(Menus.SortMenu.values());
         menu = scan.nextInt();
-        switch (menu){
+        switch (menu) {
             case 1:
                 Monsters.setSortBy(Monsters.SortBy.TITLE);
                 Collections.sort(monsters);
-                for (Monsters monsters: monsters){
+                for (Monsters monsters : monsters) {
                     if (monsters.getTitle() != null)
-                    System.out.println(monsters.getTitle() + " " +  monsters.getMonsterType()+ " " + monsters.getLevel());
+                        System.out.println(monsters.getTitle() + " " + monsters.getMonsterType() + " " + monsters.getLevel());
                     else
                         System.out.println("Feral " + monsters.getMonsterType() + monsters.getLevel());
                 }
@@ -308,7 +286,7 @@ public class DungeonProgram {
             case 2:
                 Monsters.setSortBy(Monsters.SortBy.AFFIX);
                 Collections.sort(monsters);
-                for (Monsters monsters: monsters){
+                for (Monsters monsters : monsters) {
                     if (monsters != null)
                         System.out.println(monsters);
                     else
@@ -318,7 +296,7 @@ public class DungeonProgram {
             case 3:
                 Monsters.setSortBy(Monsters.SortBy.NAME);
                 Collections.sort(monsters);
-                for (Monsters monsters: monsters){
+                for (Monsters monsters : monsters) {
                     if (monsters != null)
                         System.out.println(monsters);
                     else
@@ -328,7 +306,7 @@ public class DungeonProgram {
             case 4:
                 Monsters.setSortBy(Monsters.SortBy.LEVEL);
                 Collections.sort(monsters);
-                for (Monsters monsters: monsters){
+                for (Monsters monsters : monsters) {
                     if (monsters != null)
                         System.out.println(monsters);
                     else
@@ -338,7 +316,7 @@ public class DungeonProgram {
             case 5:
                 Monsters.setSortBy(Monsters.SortBy.STRENGTH);
                 Collections.sort(monsters);
-                for (Monsters monsters: monsters){
+                for (Monsters monsters : monsters) {
                     if (monsters != null)
                         System.out.println(monsters + " strength: " + monsters.getStrength());
                     else
@@ -348,7 +326,7 @@ public class DungeonProgram {
             case 6:
                 Monsters.setSortBy(Monsters.SortBy.DEXTERITY);
                 Collections.sort(monsters);
-                for (Monsters monsters: monsters){
+                for (Monsters monsters : monsters) {
                     if (monsters != null)
                         System.out.println(monsters + " dexterity: " + monsters.getDexterity());
                     else
@@ -358,7 +336,7 @@ public class DungeonProgram {
             case 7:
                 Monsters.setSortBy(Monsters.SortBy.INTELLIGENCE);
                 Collections.sort(monsters);
-                for (Monsters monsters: monsters){
+                for (Monsters monsters : monsters) {
                     if (monsters != null)
                         System.out.println(monsters + " intelligence: " + monsters.getIntelligence());
                     else
@@ -368,7 +346,7 @@ public class DungeonProgram {
             case 8:
                 Monsters.setSortBy(Monsters.SortBy.HEALTH);
                 Collections.sort(monsters);
-                for (Monsters monsters: monsters){
+                for (Monsters monsters : monsters) {
                     if (monsters != null)
                         System.out.println(monsters + " health: " + monsters.getHealth());
                     else
@@ -378,7 +356,7 @@ public class DungeonProgram {
             case 9:
                 Monsters.setSortBy(Monsters.SortBy.MANA);
                 Collections.sort(monsters);
-                for (Monsters monsters: monsters){
+                for (Monsters monsters : monsters) {
                     if (monsters != null)
                         System.out.println(monsters + " mana: " + monsters.getMana());
                     else
@@ -398,7 +376,7 @@ public class DungeonProgram {
         int menu3 = scan.nextInt();
         switch (menu3) {
             case 1:
-                FileUtils.saveObject(monsterSaveOrLoad, "monstersSaveFile.ser", StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING);
+                FileUtils.saveObject(monsterSaveOrLoad, "monstersSaveFile.ser", StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
                 System.out.println("Saved monsters in portal: ");
                 for (Monsters monsters : monsterSaveOrLoad) {
                     if (monsters != null)
@@ -417,8 +395,7 @@ public class DungeonProgram {
                             monsters.add(monster);
                             System.out.println(monster);
                         }
-                    }
-                    else{
+                    } else {
                         System.out.println("No monsters loaded from portal");
                     }
                     System.out.println("Your monsters are leaving the portal and have entered your dungeon");
@@ -452,10 +429,10 @@ public class DungeonProgram {
         System.out.println("Option 11 exit ");
     }
 
-    private void enterDungeon(){
+    private void enterDungeon() {
         System.out.println("Enter hero first name, last name and  level: ");
         hero = new Hero(tryCatchString(), tryCatchString(), tryCatchInt());
-        while (hero.getHealth() > 0){
+        while (hero.getHealth() > 0) {
 
         }
     }
@@ -474,10 +451,17 @@ public class DungeonProgram {
         while (i < 5) {
             MonsterFactory.MonsterAffix monsterAffix = MonsterFactory.MonsterAffix.values()[rand.nextInt(MonsterFactory.MonsterAffix.values().length)];
             MonsterFactory.MonsterType monsterType = MonsterFactory.MonsterType.values()[rand.nextInt(MonsterFactory.MonsterType.values().length)];
-            monsters.add(new Monsters(monsterAffix.monsterAffix, monsterType.monsterType, rand.nextInt((10-1)+1)+1));
+            monsters.add(new Monsters(monsterAffix.monsterAffix, monsterType.monsterType, rand.nextInt((10 - 1) + 1) + 1));
             monsters.get(i).addEquipment("No gear due to feral monster");
             monsters.get(i).setTitle("Feral ");
             i++;
+        }
+    }
+
+    private <T extends HasDescription> void menus(T[] choices) {
+        int i = 1;
+        for (T menuItem : choices){
+            System.out.println(i++ + ". " + menuItem.getDescription());
         }
     }
 

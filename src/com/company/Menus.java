@@ -1,6 +1,24 @@
 package com.company;
 
+import java.security.PublicKey;
+
 public class Menus {
+
+    private static MainMenu mainMenu;
+    private static ShowMenu showMenu;
+    private static SortMenu sortMenu;
+
+    public static MainMenu getMainMenu() {
+        return mainMenu;
+    }
+
+    public static ShowMenu getShowMenu() {
+        return showMenu;
+    }
+
+    public static SortMenu getSortMenu() {
+        return sortMenu;
+    }
 
     enum MainMenu implements HasDescription{
         ADD_MONSTER("Add monster"),
@@ -23,7 +41,7 @@ public class Menus {
 
         @Override
         public String getDescription() {
-            return null;
+            return description;
         }
     }
     enum ShowMenu implements HasDescription{
@@ -42,11 +60,30 @@ public class Menus {
 
         @Override
         public String getDescription() {
-            return null;
+            return description;
         }
 
     }
-    enum SortMenu{
+    enum SortMenu implements HasDescription{
+        TITLE("Title"),
+        AFFIX("Affix"),
+        NAME("Name"),
+        LEVEL("Level"),
+        STRENGTH("Strength"),
+        DEXTERITY("Dexterity"),
+        INTELLIGENCE("Intelligence"),
+        HEALTH("Health"),
+        MANA("Mana");
 
+        public String description;
+
+        private SortMenu(String description){
+            this.description = description;
+        }
+
+        @Override
+        public String getDescription() {
+            return description;
+        }
     }
 }
