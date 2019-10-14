@@ -14,7 +14,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     private int health;
     private int mana;
 
-    Monsters(MonsterFactory.MonsterAffix monsterAffix, MonsterFactory.MonsterType monsterName, int level) {
+    Monsters(String monsterAffix, String monsterName, int level) {
         super(monsterAffix, monsterName);
         this.level = level;
         this.equipment = new ArrayList<>();
@@ -62,10 +62,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     public void recruitedMonster() {
         MonsterFactory.MonsterAffix affix = MonsterFactory.getMonsterAffix();
         MonsterFactory.MonsterType name = MonsterFactory.getMonsterType();
-        if (affix != null && name != null)
-        System.out.println(affix + " " + name + " level " + level + " has been added to your dungeon");
-        else
-            System.out.println("Error");
+        System.out.println(affix.monsterAffix + " " + name.monsterType + " level " + level + " has been added to your dungeon");
     }
 
     public ArrayList<Equipment> getEquipment() {
