@@ -371,8 +371,7 @@ public class DungeonProgram {
 
     private void saveOrLoad() {
         ArrayList<Monsters> monsterSaveOrLoad = new ArrayList<>(monsters);
-        System.out.println("1. Save your monsters in a portal");
-        System.out.println("2. Load saved monsters from portal");
+        menus(Menus.SaveMenu.values());
         int menu3 = scan.nextInt();
         switch (menu3) {
             case 1:

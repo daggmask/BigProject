@@ -3,23 +3,6 @@ package com.company;
 import java.security.PublicKey;
 
 public class Menus {
-
-    private static MainMenu mainMenu;
-    private static ShowMenu showMenu;
-    private static SortMenu sortMenu;
-
-    public static MainMenu getMainMenu() {
-        return mainMenu;
-    }
-
-    public static ShowMenu getShowMenu() {
-        return showMenu;
-    }
-
-    public static SortMenu getSortMenu() {
-        return sortMenu;
-    }
-
     enum MainMenu implements HasDescription{
         ADD_MONSTER("Add monster"),
         ADD_LOOT("Add loot/treasure"),
@@ -84,6 +67,21 @@ public class Menus {
         @Override
         public String getDescription() {
             return description;
+        }
+    }
+    enum SaveMenu implements HasDescription{
+        SAVE("Save"),
+        LOAD("Load");
+
+        public String description;
+
+        private SaveMenu(String description){
+            this.description = description;
+        }
+
+        @Override
+        public String getDescription() {
+            return null;
         }
     }
 }
