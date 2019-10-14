@@ -398,7 +398,7 @@ public class DungeonProgram {
         int menu3 = scan.nextInt();
         switch (menu3) {
             case 1:
-                FileUtils.saveObject(monsterSaveOrLoad, "monstersSaveFile.ser", StandardOpenOption.CREATE);
+                FileUtils.saveObject(monsterSaveOrLoad, "monstersSaveFile.ser", StandardOpenOption.CREATE,StandardOpenOption.TRUNCATE_EXISTING);
                 System.out.println("Saved monsters in portal: ");
                 for (Monsters monsters : monsterSaveOrLoad) {
                     if (monsters != null)
