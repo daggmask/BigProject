@@ -4,20 +4,20 @@ import java.io.Serializable;
 
 public abstract class Entity implements Serializable {
    private String monsterAffix;
-   private String monsterName;
+   private String monsterType;
     public abstract void recruitedMonster();
 
-    Entity(String monsterAffix, String monsterName){
+    Entity(String monsterAffix, String monsterType){
         this.monsterAffix = monsterAffix;
-        this.monsterName = monsterName;
+        this.monsterType = monsterType;
     }
 
     public String getMonsterAffix() {
         return monsterAffix;
     }
 
-    public String getMonsterName() {
-        return monsterName;
+    public String getMonsterType() {
+        return monsterType;
     }
 }
 

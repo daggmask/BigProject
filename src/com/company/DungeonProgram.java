@@ -137,7 +137,7 @@ public class DungeonProgram {
                     monster.addEquipment(tryCatchString());
                 }
             } else {
-                System.out.println("No items added to " + monster.getMonsterName());
+                System.out.println("No items added to " + monster.getMonsterType());
             }
             if (amountOfItems > MAX_EQUIPMENT) {
                 System.out.println("You can't have that many items on the monster");
@@ -163,7 +163,7 @@ public class DungeonProgram {
         if (monsters.get(remove) != null) {
             System.out.println("Monster: "
                     + monsters.get(remove).getMonsterAffix() + " "
-                    + monsters.get(remove).getMonsterName() + " "
+                    + monsters.get(remove).getMonsterType() + " "
                     + monsters.get(remove).getLevel() + " has been removed");
             monsters.remove(remove);
         } else
@@ -196,7 +196,7 @@ public class DungeonProgram {
             case 1:
                 for (Monsters monsters : monsters) {
                     if (monsters != null) {
-                        System.out.println(monsters.getTitle() + monsters.getMonsterName());
+                        System.out.println(monsters.getTitle() + monsters.getMonsterType());
                     } else {
                         System.out.println("There's no monsters in the dungeon");
                     }
@@ -207,7 +207,7 @@ public class DungeonProgram {
                 int amountOfMonsters = 0;
                 for (Monsters monsters : monsters) {
                     if (monsters != null) {
-                        System.out.println(monsters.getMonsterName() + " " + monsters.getLevel());
+                        System.out.println(monsters.getMonsterType() + " " + monsters.getLevel());
                         amountOfMonsters++;
                         averageLevel = averageLevel + monsters.getLevel();
                     } else {
@@ -220,7 +220,7 @@ public class DungeonProgram {
             case 3:
                 for (Monsters monsters : monsters) {
                     if (monsters != null) {
-                        System.out.println(monsters.getMonsterAffix() + " " + monsters.getMonsterName());
+                        System.out.println(monsters.getMonsterAffix() + " " + monsters.getMonsterType());
                     } else {
                         System.out.println("There's no monsters in the dungeon");
                     }
@@ -229,7 +229,7 @@ public class DungeonProgram {
             case 4:
                 for (Monsters monsters : monsters) {
                     if (monsters != null) {
-                        System.out.println( monsters.getTitle() + monsters.getMonsterAffix() + " " + monsters.getMonsterName() + " " + monsters.getLevel());
+                        System.out.println( monsters.getTitle() + monsters.getMonsterAffix() + " " + monsters.getMonsterType() + " " + monsters.getLevel());
                     } else {
                         System.out.println("There's no monsters in the dungeon");
                     }
@@ -242,12 +242,12 @@ public class DungeonProgram {
                 for (Monsters monster : monsters) {
                     if (monster != null) {
                         if (monster == monsters.get(monsterIndex)) {
-                            System.out.println("Showing: " + monster.getMonsterAffix() + " " + monster.getMonsterName() + " " + monster.getLevel());
+                            System.out.println("Showing: " + monster.getMonsterAffix() + " " + monster.getMonsterType() + " " + monster.getLevel());
                             for (Equipment items : monsters.get(monsterIndex).getEquipment()) {
                                 if (items.getGear() != null)
                                     System.out.println(items.getGear());
                                 else
-                                    System.out.println(monster.getMonsterAffix() + " " + monster.getMonsterName() + " has no gear");
+                                    System.out.println(monster.getMonsterAffix() + " " + monster.getMonsterType() + " has no gear");
                             }
                         }
                     }
@@ -260,7 +260,7 @@ public class DungeonProgram {
                 for (Monsters monster : monsters) {
                     if (monster != null) {
                         if (monster == monsters.get(monsterIndex)) {
-                            System.out.println("Showing: "+ monster.getTitle() + monster.getMonsterAffix() + " " + monster.getMonsterName() + " " + monster.getLevel());
+                            System.out.println("Showing: "+ monster.getTitle() + monster.getMonsterAffix() + " " + monster.getMonsterType() + " " + monster.getLevel());
                             System.out.println("Strength: " + monster.getStrength());
                             System.out.println("Dexterity: " + monster.getDexterity());
                             System.out.println("Intelligence: " + monster.getIntelligence());
@@ -300,9 +300,9 @@ public class DungeonProgram {
                 Collections.sort(monsters);
                 for (Monsters monsters: monsters){
                     if (monsters.getTitle() != null)
-                    System.out.println(monsters.getTitle() +  monsters.getMonsterName() + monsters.getLevel());
+                    System.out.println(monsters.getTitle() +  monsters.getMonsterType() + monsters.getLevel());
                     else
-                        System.out.println("Feral " + monsters.getMonsterName() + monsters.getLevel());
+                        System.out.println("Feral " + monsters.getMonsterType() + monsters.getLevel());
                 }
                 break;
             case 2:
@@ -310,7 +310,7 @@ public class DungeonProgram {
                 Collections.sort(monsters);
                 for (Monsters monsters: monsters){
                     if (monsters != null)
-                        System.out.println(monsters.getMonsterAffix() + monsters.getMonsterName() + monsters.getLevel());
+                        System.out.println(monsters.getMonsterAffix() + monsters.getMonsterType() + monsters.getLevel());
                     else
                         System.out.println("Monsters doesn't exist");
                 }
@@ -320,7 +320,7 @@ public class DungeonProgram {
                 Collections.sort(monsters);
                 for (Monsters monsters: monsters){
                     if (monsters != null)
-                        System.out.println(monsters.getMonsterAffix() + monsters.getMonsterName());
+                        System.out.println(monsters.getMonsterAffix() + monsters.getMonsterType());
                     else
                         System.out.println("Monsters doesn't exist");
                 }
@@ -330,7 +330,7 @@ public class DungeonProgram {
                 Collections.sort(monsters);
                 for (Monsters monsters: monsters){
                     if (monsters != null)
-                        System.out.println(monsters.getMonsterAffix() + monsters.getMonsterName() + monsters.getLevel());
+                        System.out.println(monsters.getMonsterAffix() + monsters.getMonsterType() + monsters.getLevel());
                     else
                         System.out.println("Monsters doesn't exist");
                 }

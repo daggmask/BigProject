@@ -14,8 +14,8 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     private int health;
     private int mana;
 
-    Monsters(String monsterAffix, String monsterName, int level) {
-        super(monsterAffix, monsterName);
+    Monsters(String monsterAffix, String monsterType, int level) {
+        super(monsterAffix, monsterType);
         this.level = level;
         this.equipment = new ArrayList<>();
         generateStats();
@@ -126,9 +126,9 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
             case INTELLIGENCE:
                 return -(intelligence - monsters.getIntelligence());
             case NAME:
-                return MonsterFactory.getMonsterType().toString().compareToIgnoreCase(MonsterFactory.getMonsterType().toString()); // Fix sort
+                return getMonsterType().compareToIgnoreCase(monsters.getMonsterType()); // Fix sort
             case AFFIX:
-                return MonsterFactory.getMonsterAffix().toString().compareToIgnoreCase(MonsterFactory.getMonsterType().toString()); // Fix sort
+                return getMonsterAffix().compareToIgnoreCase(monsters.getMonsterAffix()); // Fix sort
             case LEVEL:
                 return -(level - monsters.level);
             default:
@@ -138,6 +138,6 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
 
     @Override
     public String toString() {
-        return getMonsterAffix() + " " + getMonsterName() + " " + level;
+        return getMonsterAffix() + " " + getMonsterType() + " " + level;
     }
 }
