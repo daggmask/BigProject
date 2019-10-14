@@ -60,9 +60,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     }
 
     public void recruitedMonster() {
-        MonsterFactory.MonsterAffix affix = MonsterFactory.getMonsterAffix();
-        MonsterFactory.MonsterType name = MonsterFactory.getMonsterType();
-        System.out.println(affix.monsterAffix + " " + name.monsterType + " level " + level + " has been added to your dungeon");
+        System.out.println(toString() + " has been added to your dungeon");
     }
 
     public ArrayList<Equipment> getEquipment() {
@@ -136,5 +134,10 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
             default:
                 return 0;
         }
+    }
+
+    @Override
+    public String toString() {
+        return getMonsterAffix() + " " + getMonsterName() + " " + level;
     }
 }

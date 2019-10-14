@@ -474,7 +474,7 @@ public class DungeonProgram {
         while (i < 5) {
             MonsterFactory.MonsterAffix monsterAffix = MonsterFactory.MonsterAffix.values()[rand.nextInt(MonsterFactory.MonsterAffix.values().length)];
             MonsterFactory.MonsterType monsterType = MonsterFactory.MonsterType.values()[rand.nextInt(MonsterFactory.MonsterType.values().length)];
-            monsters.add(new Monsters(monsterAffix.monsterAffix, monsterType.monsterType, 13));
+            monsters.add(new Monsters(monsterAffix.monsterAffix, monsterType.monsterType, rand.nextInt((10-1)+1)+1));
             monsters.get(i).addEquipment("No gear due to feral monster");
             monsters.get(i).setTitle("Feral ");
             i++;
