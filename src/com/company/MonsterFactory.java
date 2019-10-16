@@ -11,7 +11,9 @@ public class MonsterFactory {
         Skeleton("Skeleton"),
         Zombie("Zombie"),
         Porcupine("Porcupine"),
+        Slime("Slime"),
         Beastman("Beastman");
+
 
         public String monsterType;
 
@@ -26,6 +28,8 @@ public class MonsterFactory {
         Wise("Wise"),
         Handy("Handy"),
         Ugly("Ugly"),
+        Strong("Strong"),
+        Weak("Weak"),
         Angry("Angry");
 
         public String monsterAffix;

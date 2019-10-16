@@ -11,7 +11,6 @@ public class DungeonProgram {
     private ArrayList<DungeonMaster> dungeonMasters = new ArrayList<>();
     private ArrayList<LootOrTreasures> lootOrTreasures = new ArrayList<>();
     private ArrayList<Monsters> monsters = new ArrayList<>();
-    private Hero hero;
     private final static int MAX_MONSTERS = 30;
     private final static int MAX_LOOT = 20;
     private final static int MAX_EQUIPMENT = 20;
@@ -426,7 +425,7 @@ public class DungeonProgram {
 
     private void enterDungeon() {
         System.out.println("Enter hero first name, last name and  level: ");
-        hero = new Hero(tryCatchString(), tryCatchString(), tryCatchInt());
+        Hero hero = new Hero(tryCatchString(), tryCatchString(), tryCatchInt());
         while (hero.getHealth() > 0 || monsters.size() == 0) {
 
         }
@@ -434,7 +433,7 @@ public class DungeonProgram {
     } //Implement
 
     private void runBattleSimulation(){
-        
+
     }
     private void exit() {
         for (DungeonMaster dungeonMaster : dungeonMasters) {
