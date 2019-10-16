@@ -434,7 +434,7 @@ public class DungeonProgram {
     } //Implement
 
     private void runBattleSimulation(){
-
+        
     }
     private void exit() {
         for (DungeonMaster dungeonMaster : dungeonMasters) {
