@@ -69,8 +69,8 @@ public class Menu {
         }
     }
     enum SaveMenu implements HasDescription{
-        SAVE("Save"),
-        LOAD("Load");
+        SAVE("Save monsters and loot/treasure"),
+        LOAD("Load monsters and loot/treasure");
 
         public String description;
 

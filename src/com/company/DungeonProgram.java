@@ -344,24 +344,36 @@ public class DungeonProgram {
         switch (printMenuAndGetChoice(Menu.SaveMenu.values())) {
             case SAVE:
                 FileUtils.saveObject(monsterSaveOrLoad, "monstersSaveFile.ser", StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
-                System.out.println("Saved monsters in portal: ");
+                FileUtils.saveObject(lootOrTreasures, "LootOrTreasure.ser", StandardOpenOption.CREATE, StandardOpenOption.TRUNCATE_EXISTING);
+                System.out.println("Saving monsters in portal: ");
                 for (Monsters monsters : monsterSaveOrLoad) {
                     if (monsters != null)
                         System.out.println(monsters);
                     else
                         System.out.println("No monsters saved");
                 }
+                loadDots();
                 System.out.println("Your monsters are saved in the portal");
+                System.out.print("Saving loot or treasures");
+                loadDots();
+                for (LootOrTreasures lootOrTreasure: lootOrTreasures){
+                    if (lootOrTreasure != null)
+                        System.out.println(lootOrTreasure);
+                    else
+                        System.out.println("No loot or treasure saved");
+                }
+                System.out.println("Saving complete");
                 break;
             case LOAD:
                 if (FileUtils.loadObject("monstersSaveFile.ser") != null) {
                     ArrayList<Monsters> savedMonsters = (ArrayList<Monsters>) FileUtils.loadObject("monstersSaveFile.ser");
-                    System.out.println("Loaded monsters from the portal:");
+                    System.out.println("Loading monsters from the portal:");
                     if (savedMonsters != null) {
                         monsters.clear();
                         for (Monsters monster : savedMonsters) {
                             monsters.add(monster);
                             System.out.println(monster);
+                            loadingTime(2000);
                         }
                     } else {
                         System.out.println("No monsters loaded from portal");
@@ -371,6 +383,21 @@ public class DungeonProgram {
                     System.out.println("There are no monsters saved in the portal");
                     System.out.println("You have to save monsters in the portal to be able to load them into your dungeon");
                 }
+                if (FileUtils.loadObject("LootOrTreasure.ser") != null){
+                    ArrayList<LootOrTreasures> savedLootOrTreasures = (ArrayList<LootOrTreasures>) FileUtils.loadObject("LootOrTreasure.ser");
+                    System.out.println("Loading loot or treasure from portal: ");
+                    if (savedLootOrTreasures != null){
+                        lootOrTreasures.clear();
+                        lootOrTreasures.addAll(savedLootOrTreasures);
+                        System.out.println("Loaded loot and treasure complete");
+                        loadingTime(2000);
+                    }
+                    else {
+                        System.out.println("No loot or treasure could be loaded from portal");
+                    }
+                }
+                else
+                    System.out.println("No loot or treasure could be found in portal");
                 break;
             default:
                 for (DungeonMaster dungeonMaster : dungeonMasters) {
@@ -400,12 +427,15 @@ public class DungeonProgram {
     private void enterDungeon() {
         System.out.println("Enter hero first name, last name and  level: ");
         hero = new Hero(tryCatchString(), tryCatchString(), tryCatchInt());
-        while (hero.getHealth() > 0) {
+        while (hero.getHealth() > 0 || monsters.size() == 0) {
 
         }
         System.out.println(hero.getTitle() + " has died");
-    }
+    } //Implement
 
+    private void runBattleSimulation(){
+
+    }
     private void exit() {
         for (DungeonMaster dungeonMaster : dungeonMasters) {
             if (dungeonMaster != null)

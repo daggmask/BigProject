@@ -17,7 +17,7 @@ public class Hero extends HolyEntity implements Serializable {
     Hero(String firstName, String lastName, int level) {
         super(firstName, lastName);
         this.level = level;
-        this.title = " Super ";
+        this.title = " Hero ";
         generateStats();
         addedEntity();
     }
