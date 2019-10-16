@@ -1,8 +1,7 @@
 package com.company;
 
-import java.security.PublicKey;
+public class Menu {
 
-public class Menus {
     enum MainMenu implements HasDescription{
         ADD_MONSTER("Add monster"),
         ADD_LOOT("Add loot/treasure"),
@@ -81,7 +80,7 @@ public class Menus {
 
         @Override
         public String getDescription() {
-            return null;
+            return description;
         }
     }
 }
