@@ -39,31 +39,19 @@ public class DungeonProgram {
             }
         } else if (loadOrNewDungeon == 2) {
             System.out.println("Some monsters are already living in the dungeon, they are being added to your list of monsters");
-            System.out.println("Generating random monsters...");
-            try {
-                Thread.sleep(2000);
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            System.out.print("Generating random monsters");
+            loadDots();
             addFeralMonsters();
         }
     }
 
     public void MainMenu(String dungeonName) {
         System.out.println("Welcome to the dungeon: " + dungeonName);
-        try {
-            sleep(2000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        loadingTime(3000);
         System.out.println("Please enter your full name: ");
         dungeonMasters.add(new DungeonMaster(tryCatchString(), tryCatchString()));
-        System.out.println("Loading...");
-        try {
-            sleep(2000);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        System.out.print("Loading");
+        loadDots();
         int menu = 1;
         do {
             System.out.println("----------------------------------------------");
@@ -131,6 +119,9 @@ public class DungeonProgram {
             if (amountOfItems > MAX_EQUIPMENT) {
                 System.out.println("You can't have that many items on the monster");
             }
+            System.out.print("Adding monster to the dungeon.");
+            loadDots();
+            System.out.println("Monster added to dungeon");
             monsters.add(monster);
         } else {
             System.out.println("You've reached max amount of monster manageable in the dungeon");
@@ -433,6 +424,7 @@ public class DungeonProgram {
             monsters.get(i).addEquipment("No gear due to feral monster");
             monsters.get(i).setTitle("Feral ");
             i++;
+            loadingTime(2000);
         }
     }
 
@@ -446,13 +438,31 @@ public class DungeonProgram {
         return choices[menu - 1];
     }
 
-    private void printMonsterArray(){
+    private void printMonsterArray() {
         for (Monsters monsters : monsters) {
             if (monsters != null)
                 System.out.println(monsters);
             else
                 System.out.println("Monsters doesn't exist");
         }
+    }
+
+    private void loadingTime(int time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            System.out.println();
+        }
+    }
+
+    private void loadDots() {
+        loadingTime(1000);
+        System.out.print(".");
+        loadingTime(1000);
+        System.out.print(".");
+        loadingTime(1000);
+        System.out.println(".");
+        loadingTime(1000);
     }
 
     private int tryCatchInt() {
