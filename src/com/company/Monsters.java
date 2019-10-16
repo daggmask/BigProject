@@ -138,6 +138,6 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
 
     @Override
     public String toString() {
-        return getMonsterAffix() + " " + getMonsterType() + " " + level;
+        return getMonsterAffix() + " " + getMonsterType() + " lvl: " + level;
     }
 }

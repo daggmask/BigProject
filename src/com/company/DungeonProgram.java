@@ -246,6 +246,7 @@ public class DungeonProgram {
                 System.out.println("This option doesn't exist");
                 break;
         }
+        loadingTime(3000);
     }
 
     private void showLoot() {
