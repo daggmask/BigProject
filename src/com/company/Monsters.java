@@ -6,7 +6,7 @@ import java.util.Random;
 
 /**
  * <h1>Monster</h1>
- * base code that builds a monster
+ * base code that builds a monster generating stats and attributes random
  */
 
 
@@ -94,7 +94,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     private static SortBy sortBy;
 
     /**
-     * 
+     *
      * @param sortBy sets sorting order
      */
     public static void setSortBy(SortBy sortBy) {
