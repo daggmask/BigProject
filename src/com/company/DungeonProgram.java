@@ -1,10 +1,7 @@
 package com.company;
 
 import java.nio.file.StandardOpenOption;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * <h1>Main program</h1>
@@ -129,8 +126,10 @@ public class DungeonProgram {
             System.out.print("Generating random items"); //Add random items
             loadDots();
             while (itemCount < 10) {
-                monster.addEquipment(Equipment.Items.values()[rand.nextInt(Equipment.Items.values().length)].item);
+                Equipment.Items newItem = Equipment.Items.values()[rand.nextInt(Equipment.Items.values().length)];
+                monster.addEquipment(newItem.item);
                 itemCount++;
+                itemValue += newItem.value;
             }
             System.out.println(monster.getTitle() + monster.getMonsterType() + " was given: ");
             for (Equipment item : monster.getEquipment()) {
@@ -349,6 +348,16 @@ public class DungeonProgram {
                 for (Monsters monsters : monsters) {
                     if (monsters != null)
                         System.out.println(monsters + " mana: " + monsters.getMana());
+                    else
+                        System.out.println("Monsters doesn't exist");
+                }
+                break;
+            case DAMAGE:
+                Monsters.setSortBy(Monsters.SortBy.DAMAGE);
+                Collections.sort(monsters);
+                for (Monsters monsters : monsters) {
+                    if (monsters != null)
+                        System.out.println(monsters + " damage: " + monsters.getDamage());
                     else
                         System.out.println("Monsters doesn't exist");
                 }

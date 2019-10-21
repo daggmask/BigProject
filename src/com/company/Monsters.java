@@ -19,6 +19,8 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     private int intelligence;
     private int health;
     private int mana;
+    private int attackSpeed;
+    private int damage;
 
     /**
      *This constructor is for creating a monster object with randomized affix, type and level in the controller
@@ -62,6 +64,14 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         return level;
     }
 
+    public int getDamage() {
+        return damage;
+    }
+
+    public void setDamage(int damage) {
+        this.damage = damage;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
@@ -89,6 +99,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         HEALTH,
         MANA,
         NAME,
+        DAMAGE,
     }
 
     private static SortBy sortBy;
@@ -124,6 +135,8 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         }
         this.health = (int) Math.round(strength * (level * 1.5));
         this.mana = (int) Math.round(intelligence * (level * 1.2));
+        this.attackSpeed = (int) Math.round(dexterity * (level * 0.1));
+        this.damage = (int) Math.round((strength * attackSpeed) * 0.8);
     }
 
     @Override
@@ -147,6 +160,8 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
                 return getMonsterAffix().compareToIgnoreCase(monsters.getMonsterAffix()); // Fix sort
             case LEVEL:
                 return -(level - monsters.level);
+            case DAMAGE:
+                return -(damage - monsters.damage);
             default:
                 return 0;
         }

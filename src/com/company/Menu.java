@@ -60,7 +60,8 @@ public class Menu {
         DEXTERITY("Dexterity"),
         INTELLIGENCE("Intelligence"),
         HEALTH("Health"),
-        MANA("Mana");
+        MANA("Mana"),
+        DAMAGE("Damage");
 
         public String description;
 

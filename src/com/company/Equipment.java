@@ -46,9 +46,6 @@ public class Equipment implements Serializable {
         return gear;
     }
 
-    public static Items getEquipment() {
-        return equipment;
-    }
 
     public String toString(){
         return "items: " + gear;
