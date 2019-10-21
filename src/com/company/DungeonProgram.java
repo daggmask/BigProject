@@ -11,6 +11,7 @@ import java.util.Scanner;
  * This is the main menu for <i>Dungeon simulator</i> containing different menus and options
  * <p>
  * <b>Note:</b> this version is without hero implemented into the dungeon, thus no battle system is available in this version
+ *
  * @author Martin Hellström
  * @version 1.0
  * @since 2019-10-21
@@ -23,7 +24,6 @@ public class DungeonProgram {
     private ArrayList<Monsters> monsters = new ArrayList<>();
     private final static int MAX_MONSTERS = 30;
     private final static int MAX_LOOT = 20;
-    private final static int MAX_EQUIPMENT = 20;
 
     DungeonProgram() {
         System.out.println("Do you want to load previous monsters from portal(Load)");
@@ -58,6 +58,7 @@ public class DungeonProgram {
      * <h1>Method for main menu</h1>
      * This is the main menu for dungeon
      * <b>note:</b> if user doesn't have save file or wants to create new dungeon, new monster will be generated
+     *
      * @param dungeonName Name of dungeon
      */
     public void MainMenu(String dungeonName) {
@@ -119,24 +120,24 @@ public class DungeonProgram {
      */
     public void addMonster() {
         int itemCount = 1;
+        int itemValue = 0;
         if (monsters.size() < MAX_MONSTERS) {
             System.out.println("Enter the  level of the monster");
             MonsterFactory.MonsterAffix monsterAffix = MonsterFactory.MonsterAffix.values()[rand.nextInt(MonsterFactory.MonsterAffix.values().length)];
             MonsterFactory.MonsterType monsterType = MonsterFactory.MonsterType.values()[rand.nextInt(MonsterFactory.MonsterType.values().length)];
             Monsters monster = new Monsters(monsterAffix.monsterAffix, monsterType.monsterType, tryCatchInt());
-            System.out.println("How many items do you want the monster to have?"); //Add random items
-            int amountOfItems = tryCatchInt();
-            if (amountOfItems > 0) {
-                for (int i = 0; i < amountOfItems && i < MAX_EQUIPMENT; i++) {
-                    System.out.println("Item number " + itemCount++ + ":");
-                    monster.addEquipment(tryCatchString());
-                }
-            } else {
-                System.out.println("No items added to " + monster.getMonsterType());
+            System.out.print("Generating random items"); //Add random items
+            loadDots();
+            while (itemCount < 10) {
+                monster.addEquipment(Equipment.Items.values()[rand.nextInt(Equipment.Items.values().length)].item);
+                itemCount++;
             }
-            if (amountOfItems > MAX_EQUIPMENT) {
-                System.out.println("You can't have that many items on the monster");
+            System.out.println(monster.getTitle() + monster.getMonsterType() + " was given: ");
+            for (Equipment item : monster.getEquipment()) {
+                System.out.println(item.getGear());
+                loadingTime(2000);
             }
+            System.out.println(monster + " got item value: " + itemValue);
             System.out.print("Adding monster to the dungeon.");
             loadDots();
             System.out.println("Monster added to dungeon");
@@ -379,7 +380,7 @@ public class DungeonProgram {
                 System.out.println("Your monsters are saved in the portal");
                 System.out.print("Saving loot or treasures");
                 loadDots();
-                for (LootOrTreasures lootOrTreasure: lootOrTreasures){
+                for (LootOrTreasures lootOrTreasure : lootOrTreasures) {
                     if (lootOrTreasure != null)
                         System.out.println(lootOrTreasure);
                     else
@@ -406,20 +407,18 @@ public class DungeonProgram {
                     System.out.println("There are no monsters saved in the portal");
                     System.out.println("You have to save monsters in the portal to be able to load them into your dungeon");
                 }
-                if (FileUtils.loadObject("LootOrTreasure.ser") != null){
+                if (FileUtils.loadObject("LootOrTreasure.ser") != null) {
                     ArrayList<LootOrTreasures> savedLootOrTreasures = (ArrayList<LootOrTreasures>) FileUtils.loadObject("LootOrTreasure.ser");
                     System.out.println("Loading loot or treasure from portal: ");
-                    if (savedLootOrTreasures != null){
+                    if (savedLootOrTreasures != null) {
                         lootOrTreasures.clear();
                         lootOrTreasures.addAll(savedLootOrTreasures);
                         System.out.println("Loaded loot and treasure complete");
                         loadingTime(2000);
-                    }
-                    else {
+                    } else {
                         System.out.println("No loot or treasure could be loaded from portal");
                     }
-                }
-                else
+                } else
                     System.out.println("No loot or treasure could be found in portal");
                 break;
             default:
@@ -455,13 +454,23 @@ public class DungeonProgram {
         System.out.println("Enter hero first name, last name and  level: ");
         Hero hero = new Hero(tryCatchString(), tryCatchString(), tryCatchInt());
         while (hero.getHealth() > 0 || monsters.size() == 0) {
-
+            runBattleSimulation();
         }
         System.out.println(hero.getTitle() + " has died");
     } //Implement
 
-    private void runBattleSimulation(){
+    private void runBattleSimulation() {
+        int encounterNumber = rand.nextInt((20 - 1) + 1) + 1;
+        if (encounterNumber >= 1 && encounterNumber <= 3) {
+            System.out.println("The hero has found nothing and moves on");
+        } else if (encounterNumber >= 4 && encounterNumber <= 6) {
+            boolean inBattle = true;
+            System.out.println("The hero has encountered a monster \n" +
+                    "The hero prepares for battle");
+            while (inBattle = true) {
 
+            }
+        }
     }
 
     /**
@@ -493,7 +502,7 @@ public class DungeonProgram {
         }
     }
 
-    private  <T extends HasDescription> T printMenuAndGetChoice(T[] choices) {
+    private <T extends HasDescription> T printMenuAndGetChoice(T[] choices) {
         int menu;
         int i = 1;
         for (T menuItem : choices) {

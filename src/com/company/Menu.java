@@ -36,7 +36,7 @@ public class Menu {
         LEVEL("Show only levels"),
         AFFIX("Show only affixes"),
         ALL("Show all"),
-        SHOW_EQUIPMENT("Show monster's equipment"),
+        SHOW_EQUIPMENT("Show monster's Items"),
         STATS("Show monster's stats");
 
         public String description;

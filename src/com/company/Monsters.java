@@ -6,7 +6,7 @@ import java.util.Random;
 
 /**
  * <h1>Monster</h1>
- * base code that builds a monster generating stats and attributes random
+ * base code that builds a monster generating stats and attributes random based on level
  */
 
 
@@ -24,7 +24,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
      *This constructor is for creating a monster object with randomized affix, type and level in the controller
      * @param monsterAffix the trait of monster, ex: defensive, aggressive, strong etc, randomly generated
      * @param monsterType the monster type, randomly generated from factory
-     * @param level the level of the monster, randomly generated
+     * @param level the level of the monster, <i>DungeonMaster</i> decides level
      */
     Monsters(String monsterAffix, String monsterType, int level) {
         super(monsterAffix, monsterType);
