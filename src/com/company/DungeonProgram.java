@@ -111,7 +111,7 @@ public class DungeonProgram {
 
     }
 
-    private void addMonster() {
+    public void addMonster() {
         int itemCount = 1;
         if (monsters.size() < MAX_MONSTERS) {
             System.out.println("Enter the  level of the monster");
@@ -140,7 +140,7 @@ public class DungeonProgram {
         }
     }
 
-    private void addLoot() {
+    public void addLoot() {
         if (lootOrTreasures.size() < MAX_LOOT) {
             System.out.println("Enter the treasure/loot you want to add to the dungeon");
             System.out.println("For example: Legendary sword");
@@ -148,7 +148,7 @@ public class DungeonProgram {
         }
     }
 
-    private void removeMonsters() {
+    public void removeMonsters() {
         System.out.println("Enter the monster's position that you want to remove");
         System.out.println("Note: first monster's position is 0");
         int remove = tryCatchInt();
@@ -162,7 +162,7 @@ public class DungeonProgram {
             System.out.println("Monster doesn't exist");
     }
 
-    private void removeLoot() {
+    public void removeLoot() {
         System.out.println("Enter the loot position that you want to remove");
         System.out.println("Note: first loot position is 0");
         int remove = tryCatchInt();
@@ -175,7 +175,7 @@ public class DungeonProgram {
             System.out.println("Loot doesn't exist");
     }
 
-    private void showMonsters() {
+    public void showMonsters() {
         System.out.println("Do you want to see only the monster's names or level too, or affixes too?");
         switch (printMenuAndGetChoice(Menu.ShowMenu.values())) {
             case TITLES_AND_NAMES:
@@ -262,13 +262,13 @@ public class DungeonProgram {
         loadingTime(3000);
     }
 
-    private void showLoot() {
+    public void showLoot() {
         for (LootOrTreasures lootOrTreasures : lootOrTreasures) {
             System.out.println(lootOrTreasures.getLootOrTreasure() + " " + lootOrTreasures.getRarity());
         }
     }
 
-    private void sortMonsters() {
+    public void sortMonsters() {
         System.out.println("Which aspect do you want to sort the monsters by?");
         switch (printMenuAndGetChoice(Menu.SortMenu.values())) {
             case TITLE:
@@ -352,7 +352,7 @@ public class DungeonProgram {
         }
     }
 
-    private void saveOrLoad() {
+    public void saveOrLoad() {
         ArrayList<Monsters> monsterSaveOrLoad = new ArrayList<>(monsters);
         switch (printMenuAndGetChoice(Menu.SaveMenu.values())) {
             case SAVE:
@@ -423,7 +423,7 @@ public class DungeonProgram {
         }
     }
 
-    private void help() {
+    public void help() {
         System.out.println("Option 1 adds a monster to the dungeon");
         System.out.println("Option 2 adds loot to the dungeon");
         System.out.println("Option 3 removes a monster from the dungeon");
@@ -437,7 +437,7 @@ public class DungeonProgram {
         System.out.println("Option 11 exit ");
     }
 
-    private void enterDungeon() {
+    public void enterDungeon() {
         System.out.println("Enter hero first name, last name and  level: ");
         Hero hero = new Hero(tryCatchString(), tryCatchString(), tryCatchInt());
         while (hero.getHealth() > 0 || monsters.size() == 0) {
@@ -449,7 +449,7 @@ public class DungeonProgram {
     private void runBattleSimulation(){
 
     }
-    private void exit() {
+    public void exit() {
         for (DungeonMaster dungeonMaster : dungeonMasters) {
             if (dungeonMaster != null)
                 System.out.println("Thanks for playing " + dungeonMaster.toString());
@@ -458,7 +458,7 @@ public class DungeonProgram {
         }
     }
 
-    private void addFeralMonsters() {
+    public void addFeralMonsters() {
         int i = 0;
         while (i < 5) {
             MonsterFactory.MonsterAffix monsterAffix = MonsterFactory.MonsterAffix.values()[rand.nextInt(MonsterFactory.MonsterAffix.values().length)];
@@ -471,7 +471,7 @@ public class DungeonProgram {
         }
     }
 
-    private <T extends HasDescription> T printMenuAndGetChoice(T[] choices) {
+    public  <T extends HasDescription> T printMenuAndGetChoice(T[] choices) {
         int menu;
         int i = 1;
         for (T menuItem : choices) {
@@ -481,7 +481,7 @@ public class DungeonProgram {
         return choices[menu - 1];
     }
 
-    private void printMonsterArray() {
+    public void printMonsterArray() {
         for (Monsters monsters : monsters) {
             if (monsters != null)
                 System.out.println(monsters);
