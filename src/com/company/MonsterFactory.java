@@ -1,5 +1,10 @@
 package com.company;
 
+/**
+ * <h1>Factory</h1>
+ * Factory class used to create random monsters
+ */
+
 public class MonsterFactory {
 
     enum MonsterType {

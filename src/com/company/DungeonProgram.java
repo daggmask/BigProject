@@ -5,6 +5,13 @@ import java.util.*;
 
 import static java.lang.Thread.sleep;
 
+/**
+ * <h1>Main program</h1>
+ * This is the main menu for <i>Dungeon simulator</i> containing different menus and options
+ * @author Martin Hellström
+ * @version 0.5
+ * @since 2019-10-21
+ */
 public class DungeonProgram {
     private Scanner scan = new Scanner(System.in);
     private Random rand = new Random();
@@ -44,6 +51,11 @@ public class DungeonProgram {
         }
     }
 
+    /**
+     * <h1>Method for main menu</h1>
+     * This is the main menu for dungeon
+     * @param dungeonName Name of dungeon
+     */
     public void MainMenu(String dungeonName) {
         System.out.println("Welcome to the dungeon: " + dungeonName);
         loadingTime(3000);

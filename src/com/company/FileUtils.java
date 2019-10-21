@@ -10,6 +10,11 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 
+/**
+ * <h1>Save and load</h1>
+ * Codes for saving and loading files using generics
+ */
+
 public class FileUtils {
 
     public static void saveObject(Object o, String filename, StandardOpenOption... option) {

@@ -4,6 +4,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * <h1>Monster</h1>
+ * base code that builds a monster
+ */
+
+
 public class Monsters extends Entity implements Comparable<Monsters>, Serializable {
     private int level;
     private ArrayList<Equipment> equipment;
@@ -14,6 +20,12 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     private int health;
     private int mana;
 
+    /**
+     *
+     * @param monsterAffix the trait of monster, ex: defensive, aggressive, strong etc, randomly generated
+     * @param monsterType the monster type, randomly generated from factory
+     * @param level the level of the monster, randomly generated
+     */
     Monsters(String monsterAffix, String monsterType, int level) {
         super(monsterAffix, monsterType);
         this.level = level;
@@ -81,6 +93,10 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
 
     private static SortBy sortBy;
 
+    /**
+     * 
+     * @param sortBy sets sorting order
+     */
     public static void setSortBy(SortBy sortBy) {
         Monsters.sortBy = sortBy;
     }

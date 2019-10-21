@@ -1,5 +1,10 @@
 package com.company;
 
+/**
+ * <h1>Base for hero</h1>
+ * base codes for hero class
+ */
+
 public abstract class HolyEntity {
     String firstName;
     String lastName;

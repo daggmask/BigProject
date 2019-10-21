@@ -1,5 +1,10 @@
 package com.company;
 
+/**
+ * <h1>Menus</h1>
+ * Menus used in the program using enum
+ */
+
 public class Menu {
 
     enum MainMenu implements HasDescription{

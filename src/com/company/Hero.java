@@ -4,6 +4,11 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Random;
 
+/**
+ * <h1>Hero class</h1>
+ * Hero class used to battle the dungeon you created
+ */
+
 public class Hero extends HolyEntity implements Serializable {
     private int level;
     private ArrayList<Equipment> equipment;
