@@ -2,11 +2,14 @@ package com.company;
 
 /**
  * <h1>Factory</h1>
- * Factory class used to create random monsters
+ * Factory class used to create random monsters to create dynamic when monster is created
  */
 
 public class MonsterFactory {
 
+    /**
+     * Monster types randomly selected when monster is created
+     */
     enum MonsterType {
         Minotaur("Minotaur"),
         Goblin("Goblin"),
@@ -26,6 +29,10 @@ public class MonsterFactory {
             this.monsterType = monsterType;
         }
     }
+
+    /**
+     * Monster affix randomly selected when monster is created
+     */
     enum MonsterAffix {
         Furious("Furious"),
         Defensive("Defensive"),

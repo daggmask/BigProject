@@ -2,7 +2,7 @@ package com.company;
 
 /**
  * <h1>Menus</h1>
- * Menus used in the program using enum
+ * Menus used in the program using enums
  */
 
 public class Menu {

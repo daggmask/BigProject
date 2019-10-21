@@ -9,7 +9,7 @@ import static java.lang.Thread.sleep;
  * <h1>Main program</h1>
  * This is the main menu for <i>Dungeon simulator</i> containing different menus and options
  * @author Martin Hellström
- * @version 0.5
+ * @version 0.8
  * @since 2019-10-21
  */
 public class DungeonProgram {
@@ -54,7 +54,7 @@ public class DungeonProgram {
     /**
      * <h1>Method for main menu</h1>
      * This is the main menu for dungeon
-     * <b>note:</b> if user
+     * <b>note:</b> if user doesn't have save file or wants to create new dungeon, new monster will be generated
      * @param dungeonName Name of dungeon
      */
     public void MainMenu(String dungeonName) {
