@@ -54,6 +54,7 @@ public class DungeonProgram {
     /**
      * <h1>Method for main menu</h1>
      * This is the main menu for dungeon
+     * <b>note:</b> if user
      * @param dungeonName Name of dungeon
      */
     public void MainMenu(String dungeonName) {
