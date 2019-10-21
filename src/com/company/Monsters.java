@@ -21,7 +21,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     private int mana;
 
     /**
-     *
+     *This constructor is for creating a monster object with randomized affix, type and level in the controller
      * @param monsterAffix the trait of monster, ex: defensive, aggressive, strong etc, randomly generated
      * @param monsterType the monster type, randomly generated from factory
      * @param level the level of the monster, randomly generated

@@ -1,15 +1,18 @@
 package com.company;
 
 import java.nio.file.StandardOpenOption;
-import java.util.*;
-
-import static java.lang.Thread.sleep;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Random;
+import java.util.Scanner;
 
 /**
  * <h1>Main program</h1>
  * This is the main menu for <i>Dungeon simulator</i> containing different menus and options
+ * <p>
+ * <b>Note:</b> this version is without hero implemented into the dungeon, thus no battle system is available in this version
  * @author Martin Hellström
- * @version 0.8
+ * @version 1.0
  * @since 2019-10-21
  */
 public class DungeonProgram {
