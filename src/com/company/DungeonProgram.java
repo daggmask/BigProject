@@ -1,6 +1,5 @@
 package com.company;
 
-import javax.sound.midi.Soundbank;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 
@@ -18,7 +17,7 @@ public class DungeonProgram {
     private Scanner scan = new Scanner(System.in);
     private Random rand = new Random();
     private ArrayList<DungeonMaster> dungeonMasters = new ArrayList<>();
-    private ArrayList<LootOrTreasures> lootOrTreasures = new ArrayList<>();
+    private ArrayList<LootOrTreasures.Treasure> lootOrTreasures = new ArrayList<>();
     private ArrayList<Monsters> monsters = new ArrayList<>();
     private Hero hero;
     private final static int MAX_MONSTERS = 30;
@@ -157,10 +156,13 @@ public class DungeonProgram {
 
     private void addLoot() {
         if (lootOrTreasures.size() < MAX_LOOT) {
-            System.out.println("Enter the treasure/loot you want to add to the dungeon");
-            System.out.println("For example: Legendary sword");
-            lootOrTreasures.add(new LootOrTreasures(tryCatchString(), tryCatchString()));
+            LootOrTreasures.Treasure loot = LootOrTreasures.Treasure.values()[rand.nextInt(LootOrTreasures.Treasure.values().length)];
+            lootOrTreasures.add(loot);
+            System.out.println(loot.lootAndTreasure + " has been added");
+            loadingTime(1000);
         }
+        else
+            System.out.println("Max loot/treasure capacity reached in the dungeon");
     }
 
     private void removeMonsters() {
@@ -183,8 +185,7 @@ public class DungeonProgram {
         int remove = tryCatchInt();
         if (lootOrTreasures.get(remove) != null) {
             System.out.println("Loot: "
-                    + lootOrTreasures.get(remove).getLootOrTreasure() + " "
-                    + lootOrTreasures.get(remove).getRarity() + " has been removed");
+                    + lootOrTreasures.get(remove).lootAndTreasure + " with value: " + lootOrTreasures.get(remove).lootValue+ " has been removed");
             lootOrTreasures.remove(remove);
         } else
             System.out.println("Loot doesn't exist");
@@ -278,9 +279,12 @@ public class DungeonProgram {
     }
 
     private void showLoot() {
-        for (LootOrTreasures lootOrTreasures : lootOrTreasures) {
-            System.out.println(lootOrTreasures.getLootOrTreasure() + " " + lootOrTreasures.getRarity());
+        int dungeonTreasureValue = 0;
+        for (LootOrTreasures.Treasure lootOrTreasures : lootOrTreasures) {
+            System.out.println(lootOrTreasures.lootAndTreasure + " with value: " + lootOrTreasures.lootValue);
+            dungeonTreasureValue += lootOrTreasures.lootValue;
         }
+        System.out.println("Total dungeon treasure value: " + dungeonTreasureValue);
     }
 
     private void sortMonsters() {
@@ -398,7 +402,7 @@ public class DungeonProgram {
                 System.out.println("Your monsters are saved in the portal");
                 System.out.print("Saving loot or treasures");
                 loadDots();
-                for (LootOrTreasures lootOrTreasure : lootOrTreasures) {
+                for (LootOrTreasures.Treasure lootOrTreasure : lootOrTreasures) {
                     if (lootOrTreasure != null)
                         System.out.println(lootOrTreasure);
                     else
@@ -426,7 +430,7 @@ public class DungeonProgram {
                     System.out.println("You have to save monsters in the portal to be able to load them into your dungeon");
                 }
                 if (FileUtils.loadObject("LootOrTreasure.ser") != null) {
-                    ArrayList<LootOrTreasures> savedLootOrTreasures = (ArrayList<LootOrTreasures>) FileUtils.loadObject("LootOrTreasure.ser");
+                    ArrayList<LootOrTreasures.Treasure> savedLootOrTreasures = (ArrayList<LootOrTreasures.Treasure>) FileUtils.loadObject("LootOrTreasure.ser");
                     System.out.println("Loading loot or treasure from portal: ");
                     if (savedLootOrTreasures != null) {
                         lootOrTreasures.clear();
@@ -481,6 +485,7 @@ public class DungeonProgram {
             System.out.println("Enter hero first name, last name and level: ");
             hero = new Hero(tryCatchString(), tryCatchString(), tryCatchInt());
             generateHero();
+            int heroTreasureGain = 0;
             System.out.println(hero + "'s stats: ");
             System.out.println("Health: " + hero.getHealth());
             System.out.println("Damage: " + hero.getDamage());
@@ -489,6 +494,7 @@ public class DungeonProgram {
                 switch (encounterNumber) {
                     case 1:
                         System.out.println(hero + " has encountered a monster and prepares for battle");
+                        hero.setHealth(hero.getHealth() - 30);
                         break;
                     case 2:
                         System.out.println(hero + " has encountered a trap");
@@ -501,7 +507,26 @@ public class DungeonProgram {
                         System.out.println(hero + "'s current health is: " + hero.getHealth());
                         break;
                     case 3:
-                        System.out.println(hero + " has encountered a treasure");
+                        int foundChestChance = rand.nextInt((2 - 1)+1)+1;
+                        System.out.print(hero + " found a chest");
+                        loadDots();
+                        if (lootOrTreasures.size() > 0) {
+                            if (foundChestChance == 2) {
+                                LootOrTreasures.Treasure foundTreasure = lootOrTreasures.get(rand.nextInt(lootOrTreasures.size()));
+                                System.out.println(hero + " found: " + foundTreasure.lootAndTreasure + " worth: " + foundTreasure.lootValue);
+                                loadingTime(500);
+                                heroTreasureGain += foundTreasure.lootValue;
+                                System.out.println("Current found loot/treasure value: " + heroTreasureGain);
+                                lootOrTreasures.remove(foundTreasure);
+                                loadingTime(1000);
+                            }
+                            else {
+                                System.out.println("but it was empty");
+                            }
+                        }
+                        else {
+                            System.out.println("but it was empty since there's no more loot/treasure in the dungeon");
+                        }
                         break;
                     case 4:
                         System.out.println(hero + " has encountered nothing and moves on");
@@ -525,28 +550,31 @@ public class DungeonProgram {
                                     hero.setHealth((int) (hero.getHealth() * 1.2));
                                 }
                                 System.out.println(hero + "'s current health is: " + hero.getHealth());
-                                loadingTime(2000);
+                                loadingTime(1000);
                                 break;
                             case DAMAGE:
                                 System.out.println(shrines.shrineDescription);
                                 hero.setDamage((int) (hero.getDamage() * 1.1));
                                 System.out.println(hero + "'s current damage is: " + hero.getDamage());
-                                loadingTime(2000);
+                                loadingTime(1000);
                                 break;
                         }
                         break;
                 }
                 loadingTime(2000);
             }
-            if (hero.getHealth() <= 0)
-                System.out.println(hero.getTitle() + " has died");
+            if (hero.getHealth() <= 0) {
+                System.out.println(hero.getTitle() + hero + " has died with loot value: " + heroTreasureGain);
+            }
             else if (monsters.size() == 0) {
                 System.out.println("All monsters was killed by " + hero);
+                System.out.println("Hero emerged from dungeon with total loot/treasure value: " + heroTreasureGain);
             }
         }
         else{
             System.out.println("Not an option, dungeon master" );
         }
+        loadingTime(2000);
     } //Implement
 
     private void generateHero(){
