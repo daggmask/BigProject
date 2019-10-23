@@ -51,6 +51,10 @@ public class DungeonProgram {
             loadDots();
             addFeralMonsters();
         }
+        System.out.println("We've found already existing treasures in the dungeon");
+        loadingTime(500);
+        addPresetLootOrTreasure();
+
     }
 
     /**
@@ -620,7 +624,18 @@ public class DungeonProgram {
             monsters.get(i).addEquipment("No gear due to feral monster");
             monsters.get(i).setTitle("Feral ");
             i++;
-            loadingTime(2000);
+            loadingTime(500);
+        }
+    }
+
+    public void addPresetLootOrTreasure(){
+        int presetLootOrTreasureAmount = 0;
+        while (presetLootOrTreasureAmount < 3){
+            LootOrTreasures.Treasure loot = LootOrTreasures.Treasure.values()[rand.nextInt(LootOrTreasures.Treasure.values().length)];
+            lootOrTreasures.add(loot);
+            System.out.println(loot.lootAndTreasure + " has been found and added to treasury");
+            presetLootOrTreasureAmount++;
+            loadingTime(1000);
         }
     }
 
