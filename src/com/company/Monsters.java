@@ -136,7 +136,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         this.health = (int) Math.round(strength * (level * 1.5));
         this.mana = (int) Math.round(intelligence * (level * 1.2));
         this.attackSpeed = (int) Math.round(dexterity * (level * 0.1));
-        this.damage = (int) Math.round((strength * attackSpeed) * 0.8);
+        this.damage = (int) Math.round((strength * attackSpeed) * 0.2);
     }
 
     @Override

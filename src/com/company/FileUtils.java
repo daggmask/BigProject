@@ -31,7 +31,7 @@ public class FileUtils {
         try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(path))) {
             return in.readObject();
         } catch (Exception e) {
-            System.out.println("Load failed, try again");
+            System.out.println("Load failed");
         }
         return null;
     }

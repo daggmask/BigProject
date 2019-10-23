@@ -39,7 +39,7 @@ public class Equipment implements Serializable {
         SHIELD2("Uncommon shield", 2),
         SHIELD3("Rare shield", 3),
         SHIELD4("Legendary shield", 4),
-        SHIELD5("Mythic",5),
+        SHIELD5("Mythic shield",5),
         ;
         public String item;
         public int value;

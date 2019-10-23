@@ -468,34 +468,84 @@ public class DungeonProgram {
     }
 
     private void enterDungeon() {
-        System.out.println("Enter hero first name, last name and level: ");
-        hero = new Hero(tryCatchString(), tryCatchString(),tryCatchInt());
-        generateHero();
-        while (hero.getHealth() > 0 || monsters.size() == 0) {
-            int encounterNumber = rand.nextInt((4 - 1) + 1) + 1;
-            switch (encounterNumber){
-                case 1:
-                    System.out.println(hero +" has encountered a monster and prepares for battle");
-                    break;
-                case 2:
-                    System.out.println(hero + " has encountered a trap");
-                    int trapDamage = rand.nextInt((100 - 50) + 1)+50;
-                    hero.setHealth(hero.getHealth() - trapDamage);
-                    break;
-                case 3:
-                    System.out.println(hero + " has encountered a treasure");
-                    break;
-                case 4:
-                    System.out.print(hero + " has encountered nothing and moves on");
-                    loadDots();
-                    break;
-            }
-            loadingTime(2000);
+        System.out.println("WARNING!");
+        System.out.println("Allowing the hero to enter the dungeon will take time to clear depending on the dungeon size and hero's health");
+        System.out.println("Are you sure you want to proceed?");
+        System.out.println("[Y]es or [N]o");
+        String choice = tryCatchString();
+        if (choice.equalsIgnoreCase("n") || choice.equalsIgnoreCase("no")){
+            return;
         }
-        if (hero.getHealth() <= 0)
-        System.out.println(hero.getTitle() + " has died");
-        else if (monsters.size() == 0)
-            System.out.println("All monsters was killed by " + hero);
+        else if (choice.equalsIgnoreCase("y") || choice.equalsIgnoreCase("yes")){
+            System.out.println("Enter hero first name, last name and level: ");
+            hero = new Hero(tryCatchString(), tryCatchString(), tryCatchInt());
+            generateHero();
+            System.out.println(hero + "'s stats: ");
+            System.out.println("Health: " + hero.getHealth());
+            System.out.println("Damage: " + hero.getDamage());
+            while (hero.getHealth() > 0 || monsters.size() == 0) {
+                int encounterNumber = rand.nextInt((5 - 1) + 1) + 1;
+                switch (encounterNumber) {
+                    case 1:
+                        System.out.println(hero + " has encountered a monster and prepares for battle");
+                        break;
+                    case 2:
+                        System.out.println(hero + " has encountered a trap");
+                        int trapDamage = (int) (hero.getHealth() * 0.2);
+                        Traps trapType = Traps.values()[rand.nextInt(Traps.values().length)];
+                        System.out.println(trapType.trapDescription);
+                        System.out.println(hero + " takes " + trapDamage + " damage");
+                        hero.setHealth(hero.getHealth() - trapDamage);
+                        loadingTime(2000);
+                        System.out.println(hero + "'s current health is: " + hero.getHealth());
+                        break;
+                    case 3:
+                        System.out.println(hero + " has encountered a treasure");
+                        break;
+                    case 4:
+                        System.out.println(hero + " has encountered nothing and moves on");
+                        break;
+                    case 5:
+                        Shrines shrines = Shrines.values()[rand.nextInt(Shrines.values().length)];
+                        switch (shrines) {
+                            case HEALING:
+                                System.out.println(shrines.shrineDescription);
+                                if (hero.getLevel() < 5) {
+                                    int healingDone = hero.getHealth() * 2;
+                                    healingDone = healingDone - hero.getHealth();
+                                    System.out.println(hero + " healed for: " + healingDone + " health");
+                                    loadingTime(1000);
+                                    hero.setHealth(hero.getHealth() * 2);
+                                } else {
+                                    int healingDone = (int) (hero.getHealth() * 1.2);
+                                    healingDone = healingDone - hero.getHealth();
+                                    System.out.println(hero + " healed for: " + healingDone + " health");
+                                    loadingTime(1000);
+                                    hero.setHealth((int) (hero.getHealth() * 1.2));
+                                }
+                                System.out.println(hero + "'s current health is: " + hero.getHealth());
+                                loadingTime(2000);
+                                break;
+                            case DAMAGE:
+                                System.out.println(shrines.shrineDescription);
+                                hero.setDamage((int) (hero.getDamage() * 1.1));
+                                System.out.println(hero + "'s current damage is: " + hero.getDamage());
+                                loadingTime(2000);
+                                break;
+                        }
+                        break;
+                }
+                loadingTime(2000);
+            }
+            if (hero.getHealth() <= 0)
+                System.out.println(hero.getTitle() + " has died");
+            else if (monsters.size() == 0) {
+                System.out.println("All monsters was killed by " + hero);
+            }
+        }
+        else{
+            System.out.println("Not an option, dungeon master" );
+        }
     } //Implement
 
     private void generateHero(){
@@ -573,13 +623,12 @@ public class DungeonProgram {
     }
 
     private void loadDots() {
-        loadingTime(1000);
         System.out.print(".");
-        loadingTime(1000);
+        loadingTime(500);
         System.out.print(".");
-        loadingTime(1000);
+        loadingTime(500);
         System.out.println(".");
-        loadingTime(1000);
+        loadingTime(500);
     }
 
     private int tryCatchInt() {
