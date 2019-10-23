@@ -63,7 +63,7 @@ public class DungeonProgram {
      */
     public void MainMenu(String dungeonName) {
         System.out.println("Welcome to the dungeon: " + dungeonName);
-        loadingTime(3000);
+        loadingTime(1000);
         System.out.println("Please enter your full name: ");
         dungeonMasters.add(new DungeonMaster(tryCatchString(), tryCatchString()));
         System.out.print("Loading");
@@ -138,15 +138,16 @@ public class DungeonProgram {
                 itemCount++;
                 itemValue += newItem.value;
             }
-            System.out.println(monster.getTitle() + monster.getMonsterType() + " was given: ");
+            System.out.println(monster + " was given: ");
             for (Equipment item : monster.getEquipment()) {
                 System.out.println(item.getGear());
                 loadingTime(1000);
             }
             System.out.println(monster + " got item value: " + itemValue);
-            monster.setDamage(monster.getDamage() + itemValue);
-            System.out.print("Adding monster to the dungeon.");
+            System.out.print("Calculating monster stat based on item value");
             loadDots();
+            monster.setDamage(monster.getDamage() + itemValue);
+            monster.setHealth(monster.getHealth() + itemValue);
             System.out.println("Monster added to dungeon");
             monsters.add(monster);
         } else {

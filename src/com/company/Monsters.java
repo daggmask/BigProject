@@ -76,6 +76,10 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         this.title = title;
     }
 
+    public void setHealth(int health) {
+        this.health = health;
+    }
+
     public void addEquipment(String items) {
         Equipment gear = new Equipment(items);
         equipment.add(gear);

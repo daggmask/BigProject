@@ -11,16 +11,33 @@ public class MonsterFactory {
      * Monster types randomly selected when monster is created
      */
     enum MonsterType {
-        Minotaur("Minotaur"),
-        Goblin("Goblin"),
-        Orc("Orc"),
-        Succubus("Succubus"),
-        Elemental("Elemental"),
-        Skeleton("Skeleton"),
-        Zombie("Zombie"),
-        Porcupine("Porcupine"),
-        Slime("Slime"),
-        Beastman("Beastman");
+        MINOTAUR("Minotaur"),
+        GOBLIN("Goblin"),
+        ORC("Orc"),
+        SUCCUBUS("Succubus"),
+        ELEMENTAL("Elemental"),
+        SKELETON("Skeleton"),
+        ZOMBIE("Zombie"),
+        PORCUPINE("Porcupine"),
+        SLIME("Slime"),
+        KAPPA("Kappa"),
+        PIXIE("Pixie"),
+        LIZARD_MAN("Lizard-man"),
+        SPIDER("Spider"),
+        COW("Cow"),
+        POG("Pog"),
+        FLOWER_MONSTER("Flower monster"),
+        VAMPIRE("Vampire"),
+        FRANKENSTEIN("Frankenstein's monster"),
+        IMP("Imp"),
+        FEL_HOUND("Fel hound"),
+        DEMON("Demon"),
+        HOBBIT("Hobbit"),
+        DRAGON("Dragon"),
+        DARK_ELF("Dark elf"),
+        GOLEM("Golem"),
+        GARGOLYE("Gargolye"),
+        BEASTMAN("Beastman");
 
 
         public String monsterType;
@@ -34,15 +51,29 @@ public class MonsterFactory {
      * Monster affix randomly selected when monster is created
      */
     enum MonsterAffix {
-        Furious("Furious"),
-        Defensive("Defensive"),
-        Calm("Calm"),
-        Wise("Wise"),
-        Handy("Handy"),
-        Ugly("Ugly"),
-        Strong("Strong"),
-        Weak("Weak"),
-        Angry("Angry");
+        FURIOUS("Furious"),
+        DEFENSIVE("Defensive"),
+        AGGRESSIVE("Aggressive"),
+        HIDEOUS("Hideous"),
+        PASSIVE("Passive"),
+        LAZY("Lazy"),
+        CALM("Calm"),
+        WISE("Wise"),
+        DEPRESSED("Depressed"),
+        HANDY("Handy"),
+        UGLY("Ugly"),
+        STRONG("Strong"),
+        WEAK("Weak"),
+        BEAUTIFUL("Beautiful"),
+        CUTE("Cute"),
+        STUPID("Stupid"),
+        HANDSOME("Handsome"),
+        STUNNING("Stunning"),
+        HAIRY("Hairy"),
+        HAIRLESS("Hairless"),
+        FAST("Fast"),
+        SLOW("Slow"),
+        ANGRY("Angry");
 
         public String monsterAffix;
 
