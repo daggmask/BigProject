@@ -25,6 +25,7 @@ public class Hero extends HolyEntity implements Serializable {
         super(firstName, lastName);
         this.level = level;
         this.title = " Hero ";
+        this.equipment = new ArrayList<>();
         generateStats();
         addedEntity();
     }
@@ -42,17 +43,15 @@ public class Hero extends HolyEntity implements Serializable {
         if (this.intelligence < 10) {
             this.intelligence = 10;
         }
-        if (strength > dexterity && strength > intelligence) {
-            this.title = " Strong ";
-        } else if (dexterity > strength && dexterity > intelligence) {
-            this.title = " Fast ";
-        } else if (intelligence > strength && intelligence > dexterity) {
-            this.title = " Intelligent ";
-        }
-        this.health = (int) Math.round(strength * (level * 1.5));
-        this.mana = (int) Math.round(intelligence * (level * 1.2));
-        this.attackSpeed = (int) Math.round(dexterity * (level * 0.1));
+        this.health = (int) Math.round(strength * (level * 2));
+        this.mana = (int) Math.round(intelligence * (level * 1.5));
+        this.attackSpeed = (int) Math.round(dexterity * (level * 0.3));
         this.damage = (int) Math.round((strength * attackSpeed) * 0.8);
+    }
+
+    public void addEquipment(String items) {
+        Equipment gear = new Equipment(items);
+        equipment.add(gear);
     }
 
     public int getLevel() {
@@ -95,12 +94,17 @@ public class Hero extends HolyEntity implements Serializable {
         this.damage = damage;
     }
 
-    public int getAttackSpeed() {
-        return attackSpeed;
+    public void setHealth(int health) {
+        this.health = health;
     }
 
     @Override
     public void addedEntity() {
         System.out.println("Hero: " + getFirstName() + " " + getLastName() + " has entered the dungeon");
+    }
+
+    @Override
+    public String toString() {
+        return " " + firstName + " " + lastName + " ";
     }
 }

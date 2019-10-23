@@ -1,5 +1,6 @@
 package com.company;
 
+import javax.sound.midi.Soundbank;
 import java.nio.file.StandardOpenOption;
 import java.util.*;
 
@@ -19,8 +20,10 @@ public class DungeonProgram {
     private ArrayList<DungeonMaster> dungeonMasters = new ArrayList<>();
     private ArrayList<LootOrTreasures> lootOrTreasures = new ArrayList<>();
     private ArrayList<Monsters> monsters = new ArrayList<>();
+    private Hero hero;
     private final static int MAX_MONSTERS = 30;
     private final static int MAX_LOOT = 20;
+    private final static int MIN_ITEMS = 10;
 
     DungeonProgram() {
         System.out.println("Do you want to load previous monsters from portal(Load)");
@@ -70,43 +73,47 @@ public class DungeonProgram {
             System.out.println("----------------------------------------------");
             System.out.println("Enter your desired option");
             System.out.println("Monster section:");
-            switch (printMenuAndGetChoice(Menu.MainMenu.values())) {
-                case ADD_MONSTER:
-                    addMonster();
-                    break;
-                case ADD_LOOT:
-                    addLoot();
-                    break;
-                case REMOVE_MONSTER:
-                    removeMonsters();
-                    break;
-                case REMOVE_LOOT:
-                    removeLoot();
-                    break;
-                case SHOW_MONSTERS:
-                    showMonsters();
-                    break;
-                case SHOW_LOOT:
-                    showLoot();
-                    break;
-                case SORT_MONSTERS:
-                    sortMonsters();
-                    break;
-                case SAVE_OR_LOAD:
-                    saveOrLoad();
-                    break;
-                case HELP:
-                    help();
-                    break;
-                case HERO_SIMULATION:
-                    enterDungeon();
-                    break;
-                case EXIT:
-                    exit();
-                    menu = 0;
-                    break;
-                default:
-                    System.out.println("Dungeon master, this option does not exist. Please enter existing options");
+            try {
+                switch (printMenuAndGetChoice(Menu.MainMenu.values())) {
+                    case ADD_MONSTER:
+                        addMonster();
+                        break;
+                    case ADD_LOOT:
+                        addLoot();
+                        break;
+                    case REMOVE_MONSTER:
+                        removeMonsters();
+                        break;
+                    case REMOVE_LOOT:
+                        removeLoot();
+                        break;
+                    case SHOW_MONSTERS:
+                        showMonsters();
+                        break;
+                    case SHOW_LOOT:
+                        showLoot();
+                        break;
+                    case SORT_MONSTERS:
+                        sortMonsters();
+                        break;
+                    case SAVE_OR_LOAD:
+                        saveOrLoad();
+                        break;
+                    case HELP:
+                        help();
+                        break;
+                    case HERO_SIMULATION:
+                        enterDungeon();
+                        break;
+                    case EXIT:
+                        exit();
+                        menu = 0;
+                        break;
+                    default:
+                        System.out.println("Dungeon master, this option does not exist. Please enter existing options");
+                }
+            }catch (Exception e){
+                System.out.println("Error");
             }
         } while (menu != 0);
 
@@ -125,7 +132,7 @@ public class DungeonProgram {
             Monsters monster = new Monsters(monsterAffix.monsterAffix, monsterType.monsterType, tryCatchInt());
             System.out.print("Generating random items"); //Add random items
             loadDots();
-            while (itemCount < 10) {
+            while (itemCount < MIN_ITEMS) {
                 Equipment.Items newItem = Equipment.Items.values()[rand.nextInt(Equipment.Items.values().length)];
                 monster.addEquipment(newItem.item);
                 itemCount++;
@@ -134,9 +141,10 @@ public class DungeonProgram {
             System.out.println(monster.getTitle() + monster.getMonsterType() + " was given: ");
             for (Equipment item : monster.getEquipment()) {
                 System.out.println(item.getGear());
-                loadingTime(2000);
+                loadingTime(1000);
             }
             System.out.println(monster + " got item value: " + itemValue);
+            monster.setDamage(monster.getDamage() + itemValue);
             System.out.print("Adding monster to the dungeon.");
             loadDots();
             System.out.println("Monster added to dungeon");
@@ -460,28 +468,54 @@ public class DungeonProgram {
     }
 
     private void enterDungeon() {
-        System.out.println("Enter hero first name, last name and  level: ");
-        Hero hero = new Hero(tryCatchString(), tryCatchString(), tryCatchInt());
+        System.out.println("Enter hero first name, last name and level: ");
+        hero = new Hero(tryCatchString(), tryCatchString(),tryCatchInt());
+        generateHero();
         while (hero.getHealth() > 0 || monsters.size() == 0) {
-            runBattleSimulation();
+            int encounterNumber = rand.nextInt((4 - 1) + 1) + 1;
+            switch (encounterNumber){
+                case 1:
+                    System.out.println(hero +" has encountered a monster and prepares for battle");
+                    break;
+                case 2:
+                    System.out.println(hero + " has encountered a trap");
+                    int trapDamage = rand.nextInt((100 - 50) + 1)+50;
+                    hero.setHealth(hero.getHealth() - trapDamage);
+                    break;
+                case 3:
+                    System.out.println(hero + " has encountered a treasure");
+                    break;
+                case 4:
+                    System.out.print(hero + " has encountered nothing and moves on");
+                    loadDots();
+                    break;
+            }
+            loadingTime(2000);
         }
+        if (hero.getHealth() <= 0)
         System.out.println(hero.getTitle() + " has died");
+        else if (monsters.size() == 0)
+            System.out.println("All monsters was killed by " + hero);
     } //Implement
 
-    private void runBattleSimulation() {
-        int encounterNumber = rand.nextInt((20 - 1) + 1) + 1;
-        if (encounterNumber >= 1 && encounterNumber <= 3) {
-            System.out.println("The hero has found nothing and moves on");
-        } else if (encounterNumber >= 4 && encounterNumber <= 6) {
-            boolean inBattle = true;
-            System.out.println("The hero has encountered a monster \n" +
-                    "The hero prepares for battle");
-            while (inBattle = true) {
-
-            }
+    private void generateHero(){
+        int heroItemCount = 0;
+        int heroItemValue = 0;
+        while (heroItemCount < MIN_ITEMS) {
+            Equipment.Items newItem = Equipment.Items.values()[rand.nextInt(Equipment.Items.values().length)];
+            hero.addEquipment(newItem.item);
+            heroItemCount++;
+            heroItemValue += newItem.value;
         }
+        System.out.println(hero + " was given:");
+        for (Equipment heroItem: hero.getEquipment()){
+            System.out.println(heroItem.getGear());
+            loadingTime(1000);
+        }
+        System.out.println("with value: " + heroItemValue);
+        loadingTime(2000);
+        hero.setDamage(hero.getDamage() + heroItemValue);
     }
-
     /**
      * <h1>Exit program</h1>
      */
