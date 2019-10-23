@@ -144,7 +144,7 @@ public class DungeonProgram {
                 loadingTime(1000);
             }
             System.out.println(monster + " got item value: " + itemValue);
-            System.out.print("Calculating monster stat based on item value");
+            System.out.print("Calculating monster stats based on item value");
             loadDots();
             monster.setDamage(monster.getDamage() + itemValue);
             monster.setHealth(monster.getHealth() + itemValue);
@@ -492,7 +492,7 @@ public class DungeonProgram {
                         break;
                     case 2:
                         System.out.println(hero + " has encountered a trap");
-                        int trapDamage = (int) (hero.getHealth() * 0.2);
+                        int trapDamage = (int) (hero.getHealth() * 0.3);
                         Traps trapType = Traps.values()[rand.nextInt(Traps.values().length)];
                         System.out.println(trapType.trapDescription);
                         System.out.println(hero + " takes " + trapDamage + " damage");
