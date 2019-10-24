@@ -385,7 +385,6 @@ public class DungeonProgram {
                 break;
         }
     }
-
     /**
      * <h1>Save or load monsters</h1>
      */
