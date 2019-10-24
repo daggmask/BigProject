@@ -50,6 +50,7 @@ public class DungeonProgram {
             System.out.print("Generating random monsters");
             loadDots();
             addFeralMonsters();
+            System.out.println();
         }
         System.out.println("We've found already existing treasures in the dungeon");
         loadingTime(1000);
@@ -673,6 +674,11 @@ public class DungeonProgram {
         }
     }
 
+    /**
+     *
+     * @param index finds monster at designated index
+     */
+
     public void monsterTurn(int index){
         System.out.println(monsters.get(index).getMonsterType() + " deals " + monsters.get(index).getDamage() + " damage");
         int monsterDamageDealt = monsters.get(index).getDamage();
@@ -682,6 +688,11 @@ public class DungeonProgram {
         hero.setHealth(heroHealth);
         loadingTime(1000);
     }
+
+    /**
+     *
+     * @param index finds monster at designated index
+     */
 
     public void heroTurn(int index){
         System.out.println(hero + " deals " + hero.getDamage() + " damage");
