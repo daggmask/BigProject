@@ -19,7 +19,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     private int intelligence;
     private int health;
     private int mana;
-    private int attackSpeed;
+    private double attackSpeed;
     private int damage;
 
     /**
@@ -66,6 +66,20 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
 
     public int getDamage() {
         return damage;
+    }
+
+    public double getAttackSpeed() {
+        return attackSpeed;
+    }
+
+    @Override
+    public String getMonsterAffix() {
+        return super.getMonsterAffix();
+    }
+
+    @Override
+    public String getMonsterType() {
+        return super.getMonsterType();
     }
 
     public void setDamage(int damage) {
@@ -118,15 +132,15 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
 
     private void generateStats() {
         Random rand = new Random();
-        this.strength = level + rand.nextInt((10 - 1) + 1) + 1;
+        this.strength = level * rand.nextInt((15 - 1) + 1) + 1;
         if (this.strength < 10) {
             this.strength = 10;
         }
-        this.dexterity = level + rand.nextInt((10 - 1) + 1) + 1;
+        this.dexterity = level * rand.nextInt((15 - 1) + 1) + 1;
         if (this.dexterity < 10) {
             this.dexterity = 10;
         }
-        this.intelligence = level + rand.nextInt((10 - 1) + 1) + 1;
+        this.intelligence = level * rand.nextInt((15 - 1) + 1) + 1;
         if (this.intelligence < 10) {
             this.intelligence = 10;
         }
@@ -139,8 +153,8 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         }
         this.health = (int) Math.round(strength * (level * 1.5));
         this.mana = (int) Math.round(intelligence * (level * 1.2));
-        this.attackSpeed = (int) Math.round(dexterity * (level * 0.1));
-        this.damage = (int) Math.round((strength * attackSpeed) * 0.2);
+        this.attackSpeed = (dexterity * (level * 0.1));
+        this.damage = (int) Math.round((strength * attackSpeed) * 0.1);
     }
 
     @Override

@@ -52,7 +52,7 @@ public class DungeonProgram {
             addFeralMonsters();
         }
         System.out.println("We've found already existing treasures in the dungeon");
-        loadingTime(500);
+        loadingTime(1000);
         addPresetLootOrTreasure();
 
     }
@@ -171,8 +171,7 @@ public class DungeonProgram {
 
     private void removeMonsters() {
         System.out.println("Enter the monster's position that you want to remove");
-        System.out.println("Note: first monster's position is 0");
-        // ovan, detta behöver tas bort, lista gärna och numrera position av monster vid borttagning för underlätta användaren att välja
+        printMonsterArray();
         int remove = tryCatchInt()-1;
         if (monsters.get(remove) != null) {
             System.out.println("Monster: "
@@ -242,8 +241,8 @@ public class DungeonProgram {
                 break;
             case SHOW_EQUIPMENT:
                 System.out.println("Enter monster's position that you want to view");
-                System.out.println("Note: first monster's position is 0");
-                int monsterIndex = tryCatchInt();
+                printMonsterArray();
+                int monsterIndex = tryCatchInt() - 1;
                 for (Monsters monster : monsters) {
                     if (monster != null) {
                         if (monster == monsters.get(monsterIndex)) {
@@ -260,8 +259,8 @@ public class DungeonProgram {
                 break;
             case STATS:
                 System.out.println("Enter monster's position that you want to view");
-                System.out.println("Note: first monster's position is 0");
-                monsterIndex = tryCatchInt();
+                printMonsterArray();
+                monsterIndex = tryCatchInt() - 1;
                 for (Monsters monster : monsters) {
                     if (monster != null) {
                         if (monster == monsters.get(monsterIndex)) {
@@ -269,6 +268,7 @@ public class DungeonProgram {
                             System.out.println("Strength: " + monster.getStrength());
                             System.out.println("Dexterity: " + monster.getDexterity());
                             System.out.println("Intelligence: " + monster.getIntelligence());
+                            System.out.println("Damage: " + monster.getDamage());
                             System.out.println("Health: " + monster.getHealth());
                             System.out.println("Mana: " + monster.getMana());
                         }
@@ -489,16 +489,41 @@ public class DungeonProgram {
             System.out.println("Enter hero first name, last name and level: ");
             hero = new Hero(tryCatchString(), tryCatchString(), tryCatchInt());
             generateHero();
+            if (monsters.size() < 1){
+                System.out.print(hero + " enters the dungeon but it was empty");
+                loadDots();
+                return;
+            }
             int heroTreasureGain = 0;
             System.out.println(hero + "'s stats: ");
             System.out.println("Health: " + hero.getHealth());
             System.out.println("Damage: " + hero.getDamage());
-            while (hero.getHealth() > 0 || monsters.size() == 0) {
+            while (hero.getHealth() > 0 && monsters.size() > 0) {
                 int encounterNumber = rand.nextInt((5 - 1) + 1) + 1;
                 switch (encounterNumber) {
                     case 1:
-                        System.out.println(hero + " has encountered a monster and prepares for battle");
-                        hero.setHealth(hero.getHealth() - 30);
+                        int roundCount = 1;
+                        int monsterIndex = rand.nextInt(monsters.size());
+                        Monsters foundMonster = monsters.get(monsterIndex);
+                        System.out.println(hero + " has encountered a " + foundMonster);
+                        while (hero.getHealth() > 0 && foundMonster.getHealth() > 0) {
+                            loadingTime(1000);
+                            System.out.println("ROUND " + roundCount++);
+                            System.out.println("-------------------------------------------");
+                            if (hero.getHealth() > 0)
+                                heroTurn(monsterIndex);
+                            if (foundMonster.getHealth() > 0)
+                                monsterTurn(monsterIndex);
+                        }
+                        if (hero.getHealth() < 0){
+                            System.out.println(foundMonster + " has killed " + hero);
+                            loadingTime(1000);
+                        }
+                        else if (foundMonster.getHealth() < 0){
+                            System.out.println(hero + " has killed " + foundMonster);
+                            monsters.remove(foundMonster);
+                            loadingTime(1000);
+                        }
                         break;
                     case 2:
                         System.out.println(hero + " has encountered a trap");
@@ -545,13 +570,13 @@ public class DungeonProgram {
                                     healingDone = healingDone - hero.getHealth();
                                     System.out.println(hero + " healed for: " + healingDone + " health");
                                     loadingTime(1000);
-                                    hero.setHealth(hero.getHealth() * 2);
+                                    hero.setHealth(hero.getHealth() + healingDone);
                                 } else {
-                                    int healingDone = (int) (hero.getHealth() * 1.2);
+                                    int healingDone = (int) (hero.getHealth() * 1.3);
                                     healingDone = healingDone - hero.getHealth();
                                     System.out.println(hero + " healed for: " + healingDone + " health");
                                     loadingTime(1000);
-                                    hero.setHealth((int) (hero.getHealth() * 1.2));
+                                    hero.setHealth(hero.getHealth() + healingDone);
                                 }
                                 System.out.println(hero + "'s current health is: " + hero.getHealth());
                                 loadingTime(1000);
@@ -562,24 +587,32 @@ public class DungeonProgram {
                                 System.out.println(hero + "'s current damage is: " + hero.getDamage());
                                 loadingTime(1000);
                                 break;
+                            case CURSE:
+                                System.out.println(shrines.shrineDescription);
+                                hero.setDamage((int) (hero.getDamage() * 0.9));
+                                System.out.println(hero + "'s current damage is: " + hero.getDamage());
+                                loadingTime(1000);
+                                break;
                         }
                         break;
                 }
                 loadingTime(2000);
+                System.out.println();
+                System.out.println();
             }
             if (hero.getHealth() <= 0) {
                 System.out.println(hero.getTitle() + hero + " has died with loot value: " + heroTreasureGain);
             }
             else if (monsters.size() == 0) {
                 System.out.println("All monsters was killed by " + hero);
-                System.out.println("Hero emerged from dungeon with total loot/treasure value: " + heroTreasureGain);
+                System.out.println("Hero emerged from dungeon alive with total loot/treasure value: " + heroTreasureGain);
             }
         }
         else{
             System.out.println("Not an option, dungeon master" );
         }
         loadingTime(2000);
-    } //Implement
+    }
 
     private void generateHero(){
         int heroItemCount = 0;
@@ -597,6 +630,7 @@ public class DungeonProgram {
         }
         System.out.println("with value: " + heroItemValue);
         loadingTime(2000);
+        hero.setHealth(hero.getHealth() + heroItemValue);
         hero.setDamage(hero.getDamage() + heroItemValue);
     }
     /**
@@ -624,7 +658,7 @@ public class DungeonProgram {
             monsters.get(i).addEquipment("No gear due to feral monster");
             monsters.get(i).setTitle("Feral ");
             i++;
-            loadingTime(500);
+            loadingTime(1000);
         }
     }
 
@@ -639,6 +673,26 @@ public class DungeonProgram {
         }
     }
 
+    public void monsterTurn(int index){
+        System.out.println(monsters.get(index).getMonsterType() + " deals " + monsters.get(index).getDamage() + " damage");
+        int monsterDamageDealt = monsters.get(index).getDamage();
+        int heroHealth = hero.getHealth() - monsterDamageDealt;
+        loadingTime(1000);
+        System.out.println(hero + " has " + heroHealth + " health left");
+        hero.setHealth(heroHealth);
+        loadingTime(1000);
+    }
+
+    public void heroTurn(int index){
+        System.out.println(hero + " deals " + hero.getDamage() + " damage");
+        int heroDamageDealt = hero.getDamage();
+        int monsterHealth = monsters.get(index).getHealth() - heroDamageDealt;
+        loadingTime(1000);
+        System.out.println(monsters.get(index) + " has " + monsterHealth + " health left");
+        monsters.get(index).setHealth(monsterHealth);
+        loadingTime(1000);
+    }
+
     private <T extends HasDescription> T printMenuAndGetChoice(T[] choices) {
         int menu;
         int i = 1;
@@ -650,9 +704,12 @@ public class DungeonProgram {
     }
 
     private void printMonsterArray() {
+        int position = 1;
         for (Monsters monsters : monsters) {
-            if (monsters != null)
-                System.out.println(monsters);
+            if (monsters != null) {
+                System.out.println(position + ". " + monsters);
+                position++;
+            }
             else
                 System.out.println("Monsters doesn't exist");
         }

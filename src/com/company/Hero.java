@@ -18,7 +18,7 @@ public class Hero extends HolyEntity implements Serializable {
     private int intelligence;
     private int health;
     private int mana;
-    private int attackSpeed;
+    private double attackSpeed;
     private int damage;
 
     Hero(String firstName, String lastName, int level) {
@@ -31,22 +31,22 @@ public class Hero extends HolyEntity implements Serializable {
     }
     private void generateStats(){
         Random rand = new Random();
-        this.strength = level + rand.nextInt((10 - 1) + 1) + 1;
+        this.strength = level * rand.nextInt((15 - 1) + 1) + 1;
         if (this.strength < 10) {
             this.strength = 10;
         }
-        this.dexterity = level + rand.nextInt((10 - 1) + 1) + 1;
+        this.dexterity = level * rand.nextInt((15 - 1) + 1) + 1;
         if (this.dexterity < 10) {
             this.dexterity = 10;
         }
-        this.intelligence = level + rand.nextInt((10 - 1) + 1) + 1;
+        this.intelligence = level * rand.nextInt((15 - 1) + 1) + 1;
         if (this.intelligence < 10) {
             this.intelligence = 10;
         }
-        this.health = (int) Math.round(strength * (level * 3));
+        this.health = (int) Math.round(strength * (level * 1.5));
         this.mana = (int) Math.round(intelligence * (level * 1.5));
-        this.attackSpeed = (int) Math.round(dexterity * (level * 0.1));
-        this.damage = (int) Math.round((strength * attackSpeed) * 0.5);
+        this.attackSpeed = (dexterity * (level * 0.1));
+        this.damage = (int) Math.round((strength * attackSpeed) * 0.1);
     }
 
     public void addEquipment(String items) {
@@ -66,25 +66,14 @@ public class Hero extends HolyEntity implements Serializable {
         return title;
     }
 
-    public int getStrength() {
-        return strength;
-    }
-
-    public int getDexterity() {
-        return dexterity;
-    }
-
-    public int getIntelligence() {
-        return intelligence;
+    public double getAttackSpeed() {
+        return attackSpeed;
     }
 
     public int getHealth() {
         return health;
     }
 
-    public int getMana() {
-        return mana;
-    }
 
     public int getDamage() {
         return damage;
@@ -105,6 +94,6 @@ public class Hero extends HolyEntity implements Serializable {
 
     @Override
     public String toString() {
-        return " " + firstName + " " + lastName + " ";
+        return firstName + " " + lastName + " ";
     }
 }
