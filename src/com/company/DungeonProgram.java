@@ -172,7 +172,8 @@ public class DungeonProgram {
     private void removeMonsters() {
         System.out.println("Enter the monster's position that you want to remove");
         System.out.println("Note: first monster's position is 0");
-        int remove = tryCatchInt();
+        // ovan, detta behöver tas bort, lista gärna och numrera position av monster vid borttagning för underlätta användaren att välja
+        int remove = tryCatchInt()-1;
         if (monsters.get(remove) != null) {
             System.out.println("Monster: "
                     + monsters.get(remove).getMonsterAffix() + " "
@@ -185,9 +186,8 @@ public class DungeonProgram {
 
     private void removeLoot() {
         System.out.println("Enter the loot position that you want to remove");
-        System.out.println("Note: first loot position is 0");
-        int remove = tryCatchInt();
-        if (lootOrTreasures.get(remove) != null) {
+        int remove = tryCatchInt() -1;
+        if (lootOrTreasures.get((remove)) != null) {
             System.out.println("Loot: "
                     + lootOrTreasures.get(remove).lootAndTreasure + " with value: " + lootOrTreasures.get(remove).lootValue+ " has been removed");
             lootOrTreasures.remove(remove);
