@@ -195,7 +195,7 @@ public class DungeonProgram {
             System.out.println("Loot doesn't exist");
     }
 
-    private void showMonsters() {
+    public void showMonsters() {
         System.out.println("Do you want to see only the monster's names or level too, or affixes too?");
         switch (printMenuAndGetChoice(Menu.ShowMenu.values())) {
             case TITLES_AND_NAMES:
@@ -283,7 +283,7 @@ public class DungeonProgram {
         loadingTime(3000);
     }
 
-    private void showLoot() {
+    public void showLoot() {
         int dungeonTreasureValue = 0;
         for (LootOrTreasures.Treasure lootOrTreasures : lootOrTreasures) {
             System.out.println(lootOrTreasures.lootAndTreasure + " with value: " + lootOrTreasures.lootValue);
@@ -292,7 +292,7 @@ public class DungeonProgram {
         System.out.println("Total dungeon treasure value: " + dungeonTreasureValue);
     }
 
-    private void sortMonsters() {
+    public void sortMonsters() {
         System.out.println("Which aspect do you want to sort the monsters by?");
         switch (printMenuAndGetChoice(Menu.SortMenu.values())) {
             case TITLE:
