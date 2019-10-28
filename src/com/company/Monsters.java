@@ -151,6 +151,9 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         } else if (intelligence > strength && intelligence > dexterity) {
             this.title = "Intelligent ";
         }
+        if (title == null){
+            this.title = "Wild";
+        }
         this.health = (int) Math.round(strength * (level * 1.5));
         this.mana = (int) Math.round(intelligence * (level * 1.2));
         this.attackSpeed = (dexterity * (level * 0.1));
