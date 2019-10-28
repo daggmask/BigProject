@@ -9,7 +9,7 @@ import java.util.Random;
  * Hero class used to battle the dungeon you created
  */
 
-public class Hero extends HolyEntity implements Serializable {
+public class Hero extends HolyEntity implements Character, Serializable {
     private int level;
     private ArrayList<Equipment> equipment;
     private String title;
@@ -39,7 +39,7 @@ public class Hero extends HolyEntity implements Serializable {
     /**
      * generates stats based on level defined by user
      */
-    private void generateStats(){
+    public void generateStats(){
         Random rand = new Random();
         this.strength = level * rand.nextInt((15 - 1) + 1) + 1;
         if (this.strength < 10) {

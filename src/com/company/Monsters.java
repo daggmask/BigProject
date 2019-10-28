@@ -10,7 +10,7 @@ import java.util.Random;
  */
 
 
-public class Monsters extends Entity implements Comparable<Monsters>, Serializable {
+public class Monsters extends Entity implements Comparable<Monsters>, Character, Serializable {
     /**
      * level defined by user upon creation of monster
      */
@@ -145,7 +145,7 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     /**
      * Generates stats bas on level after level of monster has been defined by user
      */
-    private void generateStats() {
+    public void generateStats() {
         Random rand = new Random();
         this.strength = level * rand.nextInt((15 - 1) + 1) + 1;
         if (this.strength < 10) {
