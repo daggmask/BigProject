@@ -67,7 +67,7 @@ public class DungeonProgram {
      * This is the main menu for dungeon
      * <b>note:</b> if user doesn't have save file or wants to create new dungeon, new monster will be generated
      *
-     * @param dungeonName Name of dungeon
+     * @param dungeonName Name of dungeon, edit in Main
      */
     public void MainMenu(String dungeonName) {
         System.out.println();
