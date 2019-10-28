@@ -70,6 +70,7 @@ public class DungeonProgram {
      * @param dungeonName Name of dungeon
      */
     public void MainMenu(String dungeonName) {
+        System.out.println();
         System.out.println("Welcome to the dungeon: " + dungeonName);
         loadingTime(1000);
         System.out.println("Please enter your full name: ");
@@ -424,6 +425,7 @@ public class DungeonProgram {
                 }
                 System.out.println("Saving complete");
                 System.out.println("Total loot/treasure value saved: " + valueSaved);
+                loadingTime(3000);
                 break;
             case LOAD:
                 if (FileUtils.loadObject("monstersSaveFile.ser") != null) {
@@ -440,9 +442,11 @@ public class DungeonProgram {
                         System.out.println("No monsters loaded from portal");
                     }
                     System.out.println("Your monsters are leaving the portal and have entered your dungeon");
+                    loadingTime(2000);
                 } else {
                     System.out.println("There are no monsters saved in the portal");
                     System.out.println("You have to save monsters in the portal to be able to load them into your dungeon");
+                    loadingTime(2000);
                 }
                 if (FileUtils.loadObject("LootOrTreasure.ser") != null) {
                     ArrayList<LootOrTreasures.Treasure> savedLootOrTreasures = (ArrayList<LootOrTreasures.Treasure>) FileUtils.loadObject("LootOrTreasure.ser");
@@ -465,6 +469,7 @@ public class DungeonProgram {
                     else
                         System.out.println("This option doesn't exist, dungeon master");
                 }
+                loadingTime(2000);
                 break;
         }
     }
