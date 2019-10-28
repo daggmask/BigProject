@@ -7,7 +7,7 @@ import java.util.*;
  * <h1>Main program</h1>
  * This is the main menu for <i>Dungeon simulator</i> containing different menus and options
  * <p>
- * <b>Note:</b> this version is without hero implemented into the dungeon, thus no battle system is available in this version
+ * <b>Note:</b> All enums use description to make print easier upon enum usage.
  *
  * @author Martin Hellström
  * @version 1.0
