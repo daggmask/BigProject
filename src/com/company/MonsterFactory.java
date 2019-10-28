@@ -62,7 +62,7 @@ public class MonsterFactory {
         DEPRESSED("Depressed"),
         HANDY("Handy"),
         UGLY("Ugly"),
-        STRONG("Strong"),
+        MUSCULAR("Muscular"),
         WEAK("Weak"),
         BEAUTIFUL("Beautiful"),
         CUTE("Cute"),
@@ -71,7 +71,7 @@ public class MonsterFactory {
         STUNNING("Stunning"),
         HAIRY("Hairy"),
         HAIRLESS("Hairless"),
-        FAST("Fast"),
+        SPEEDY("Speedy"),
         SLOW("Slow"),
         ANGRY("Angry");
 
