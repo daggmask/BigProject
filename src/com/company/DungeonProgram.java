@@ -413,13 +413,17 @@ public class DungeonProgram {
                 System.out.println("Your monsters are saved in the portal");
                 System.out.print("Saving loot or treasures");
                 loadDots();
+                int valueSaved = 0;
                 for (LootOrTreasures.Treasure lootOrTreasure : lootOrTreasures) {
-                    if (lootOrTreasure != null)
-                        System.out.println(lootOrTreasure);
+                    if (lootOrTreasure != null) {
+                        System.out.println(lootOrTreasure.lootAndTreasure + " value: " + lootOrTreasure.lootValue);
+                        valueSaved += lootOrTreasure.lootValue;
+                    }
                     else
                         System.out.println("No loot or treasure saved");
                 }
                 System.out.println("Saving complete");
+                System.out.println("Total loot/treasure value saved: " + valueSaved);
                 break;
             case LOAD:
                 if (FileUtils.loadObject("monstersSaveFile.ser") != null) {
