@@ -39,9 +39,11 @@ public class DungeonProgram {
                         System.out.println(monster);
                     }
                     System.out.println("Your monsters are leaving the portal and have entered your dungeon");
+                    loadingTime(2000);
                 }
             } else {
                 System.out.println("There are no monsters saved in the portal");
+                loadingTime(2000);
                 System.out.println("Adding feral monsters: ");
                 addFeralMonsters();
             }
@@ -52,6 +54,8 @@ public class DungeonProgram {
             addFeralMonsters();
             System.out.println();
         }
+        loadingTime(1000);
+        System.out.println();
         System.out.println("We've found already existing treasures in the dungeon");
         loadingTime(1000);
         addPresetLootOrTreasure();
