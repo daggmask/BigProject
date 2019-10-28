@@ -7,5 +7,9 @@ package com.company;
 
 public interface HasDescription {
 
+    /**
+     *
+     * @return return used for generic method
+     */
     String getDescription();
 }

@@ -18,36 +18,13 @@ class DungeonProgramTest {
             dungeonTreasureValue += lootOrTreasures.lootValue;
         }
         System.out.println("Total dungeon treasure value: " + dungeonTreasureValue);
-    }
-
-    @org.junit.jupiter.api.Test
-    void sortMonsters() {
-        ArrayList<Monsters> monsters = new ArrayList<>();
-        for (Monsters monster : monsters) {
-            if (monster != null) {
-                System.out.println(monster.getTitle() + monster.getMonsterType());
-            } else {
-                System.out.println("There's no monsters in the dungeon");
-            }
-        }
-    }
-
-    @org.junit.jupiter.api.Test
-    void help() {
-        ArrayList<LootOrTreasures.Treasure> lootOrTreasures = new ArrayList<>();
-        int dungeonTreasureValue = 0;
-        for (LootOrTreasures.Treasure lootOrTreasure : lootOrTreasures) {
-            System.out.println(lootOrTreasure + " with value: " + lootOrTreasure);
-            dungeonTreasureValue += lootOrTreasure.lootValue;
-        }
-        System.out.println("Total dungeon treasure value: " + dungeonTreasureValue);
+        assertEquals(0, dungeonTreasureValue);
     }
 
     @org.junit.jupiter.api.Test
     void addFeralMonsters() {
         int i = 0;
-        try {
-            while (i < 1) {
+            while (i < 5) {
                 MonsterFactory.MonsterAffix monsterAffix = MonsterFactory.MonsterAffix.values()[rand.nextInt(MonsterFactory.MonsterAffix.values().length)];
                 MonsterFactory.MonsterType monsterType = MonsterFactory.MonsterType.values()[rand.nextInt(MonsterFactory.MonsterType.values().length)];
                 monsters.add(new Monsters(monsterAffix.monsterAffix, monsterType.monsterType, rand.nextInt((10 - 1) + 1) + 1));
@@ -55,11 +32,8 @@ class DungeonProgramTest {
                 monsters.get(i).setTitle("Feral ");
                 i++;
                 System.out.println(monsters.size());
-                assertTrue(true);
             }
-        }catch (Exception e){
-            assertFalse(false);
-        }
+            assertEquals(i, monsters.size());
     }
 
     @org.junit.jupiter.api.Test

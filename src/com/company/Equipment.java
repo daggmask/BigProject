@@ -10,10 +10,17 @@ import java.io.Serializable;
 public class Equipment implements Serializable {
     private String gear;
 
+    /**
+     *
+     * @param gear gear generated from Items enum
+     */
     Equipment(String gear){
         this.gear = gear;
     }
 
+    /**
+     * list of items
+     */
     enum Items {
         SWORD1("Common Sword", 10),
         SWORD2("Uncommon Sword", 20),

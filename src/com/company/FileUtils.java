@@ -17,6 +17,12 @@ import java.util.ArrayList;
 
 public class FileUtils {
 
+    /**
+     *
+     * @param o dynamic object
+     * @param filename filename defined in controller upon method call
+     * @param option amount of options and option defined in controller
+     */
     public static void saveObject(Object o, String filename, StandardOpenOption... option) {
         Path path = Paths.get(filename);
         try (ObjectOutputStream out = new ObjectOutputStream(Files.newOutputStream(path, option))) {
@@ -26,6 +32,11 @@ public class FileUtils {
         }
     }
 
+    /**
+     *
+     * @param filename filename defined in controller upon method call
+     * @return
+     */
     public static Object loadObject(String filename) {
         Path path = Paths.get(filename);
         try (ObjectInputStream in = new ObjectInputStream(Files.newInputStream(path))) {

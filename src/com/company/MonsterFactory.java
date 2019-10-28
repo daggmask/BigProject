@@ -8,7 +8,9 @@ package com.company;
 public class MonsterFactory {
 
     /**
-     * Monster types randomly selected when monster is created
+     * <h1>Factory class used to generate random monsters</h1>
+     * Monster types randomly selected when monster is created in controller/program
+     * Each type and affix are dynamic and can be edited easily
      */
     enum MonsterType {
         MINOTAUR("Minotaur"),
@@ -80,16 +82,5 @@ public class MonsterFactory {
         private MonsterAffix(String monsterAffix) {
             this.monsterAffix = monsterAffix;
         }
-    }
-
-    public static MonsterType monsterType;
-    public static MonsterAffix monsterAffix;
-
-    public static MonsterAffix getMonsterAffix() {
-        return monsterAffix;
-    }
-
-    public static MonsterType getMonsterType() {
-        return monsterType;
     }
 }

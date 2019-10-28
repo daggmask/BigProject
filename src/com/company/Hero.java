@@ -21,6 +21,12 @@ public class Hero extends HolyEntity implements Serializable {
     private double attackSpeed;
     private int damage;
 
+    /**
+     * Params defined by user upon new hero being created and built-in methods to generate fully functional hero
+     * @param firstName Hero's first name
+     * @param lastName Hero's last name
+     * @param level Hero's level
+     */
     Hero(String firstName, String lastName, int level) {
         super(firstName, lastName);
         this.level = level;
@@ -29,6 +35,10 @@ public class Hero extends HolyEntity implements Serializable {
         generateStats();
         addedEntity();
     }
+
+    /**
+     * generates stats based on level defined by user
+     */
     private void generateStats(){
         Random rand = new Random();
         this.strength = level * rand.nextInt((15 - 1) + 1) + 1;
@@ -58,6 +68,9 @@ public class Hero extends HolyEntity implements Serializable {
         return level;
     }
 
+    /**
+     * @return prints equipment of hero
+     */
     public ArrayList<Equipment> getEquipment() {
         return equipment;
     }
@@ -66,9 +79,6 @@ public class Hero extends HolyEntity implements Serializable {
         return title;
     }
 
-    public double getAttackSpeed() {
-        return attackSpeed;
-    }
 
     public int getHealth() {
         return health;

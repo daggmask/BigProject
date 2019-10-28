@@ -6,6 +6,10 @@ package com.company;
  */
 
 public class Menu {
+    /**
+     * <h1>List of menus used in controller/program</h1>
+     * Each menu uses implements due to being called in controller method being generic
+     */
 
     enum MainMenu implements HasDescription{
         ADD_MONSTER("Add monster"),

@@ -11,8 +11,17 @@ import java.util.Random;
 
 
 public class Monsters extends Entity implements Comparable<Monsters>, Serializable {
+    /**
+     * level defined by user upon creation of monster
+     */
     private int level;
+    /**
+     * Each monster has a list of equipment
+     */
     private ArrayList<Equipment> equipment;
+    /**
+     * Title is based on monster stats
+     */
     private String title;
     private int strength;
     private int dexterity;
@@ -68,10 +77,6 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         return damage;
     }
 
-    public double getAttackSpeed() {
-        return attackSpeed;
-    }
-
     @Override
     public String getMonsterAffix() {
         return super.getMonsterAffix();
@@ -99,6 +104,9 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         equipment.add(gear);
     }
 
+    /**
+     * Abstract method implemented from super class
+     */
     public void recruitedMonster() {
         System.out.println(toString() + " has been added to your dungeon");
     }
@@ -106,6 +114,10 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
     public ArrayList<Equipment> getEquipment() {
         return equipment;
     }
+
+    /**
+     * SortBy enum created to make sorting easier
+     */
 
     public enum SortBy {
         TITLE,
@@ -130,6 +142,9 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         Monsters.sortBy = sortBy;
     }
 
+    /**
+     * Generates stats bas on level after level of monster has been defined by user
+     */
     private void generateStats() {
         Random rand = new Random();
         this.strength = level * rand.nextInt((15 - 1) + 1) + 1;
@@ -160,6 +175,11 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
         this.damage = (int) Math.round((strength * attackSpeed) * 0.1);
     }
 
+    /**
+     * sorting switch case
+     * @param monsters receive monsters
+     * @return
+     */
     @Override
     public int compareTo(Monsters monsters) {
         switch (sortBy) {

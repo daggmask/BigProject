@@ -8,10 +8,18 @@ package com.company;
 public class LootOrTreasures {
     private String treasure;
 
+    /**
+     *
+     * @param treasures generated from <i>Treasure</i> enum
+     *                  Randomly selected in controller.
+     */
     LootOrTreasures(String treasures){
         this.treasure = treasures;
     }
 
+    /**
+     * List of available treasures or loot found in dungeon
+     */
     enum Treasure {
         SPOILS_OF_WAR1("small spoils of war", 10),
         SPOILS_OF_WAR2("medium spoils of war", 15),
@@ -31,16 +39,16 @@ public class LootOrTreasures {
         public String lootAndTreasure;
         public int lootValue;
 
+        /**
+         *
+         * @param lootAndTreasure gives enum a description, used to print
+         * @param lootValue gives enum a value, used to calculate value of treasure/loot
+         */
         private Treasure(String lootAndTreasure, int lootValue){
             this.lootAndTreasure = lootAndTreasure;
             this.lootValue = lootValue;
         }
     }
-
-    public String getTreasure() {
-        return treasure;
-    }
-
     @Override
     public String toString() {
         return " loot: " + treasure;

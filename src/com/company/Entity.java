@@ -12,6 +12,11 @@ public abstract class Entity implements Serializable {
    private String monsterType;
     public abstract void recruitedMonster();
 
+    /**
+     *
+     * @param monsterAffix monster trait generated from monster factory
+     * @param monsterType generated from monster factory
+     */
     Entity(String monsterAffix, String monsterType){
         this.monsterAffix = monsterAffix;
         this.monsterType = monsterType;

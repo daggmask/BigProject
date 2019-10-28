@@ -16,12 +16,30 @@ import java.util.*;
 public class DungeonProgram {
     private Scanner scan = new Scanner(System.in);
     private Random rand = new Random();
+    /**
+     * list of dungeon master
+     */
     private ArrayList<DungeonMaster> dungeonMasters = new ArrayList<>();
+    /**
+     * list of loot and treasure in dungeon
+     */
     private ArrayList<LootOrTreasures.Treasure> lootOrTreasures = new ArrayList<>();
+    /**
+     * list of monsters in dungeon
+     */
     private ArrayList<Monsters> monsters = new ArrayList<>();
     private Hero hero;
+    /**
+     * max amount of monsters in dungeon
+     */
     private final static int MAX_MONSTERS = 30;
+    /**
+     * max amount of loot in dungeon
+     */
     private final static int MAX_LOOT = 20;
+    /**
+     * minimum items per entity, i.ex monster has 10 & hero has 10
+     */
     private final static int MIN_ITEMS = 10;
 
     DungeonProgram() {
@@ -720,6 +738,12 @@ public class DungeonProgram {
         loadingTime(1000);
     }
 
+    /**
+     *
+     * @param choices variabel named choices due to generic method
+     * @param <T> named <T> due to generic method
+     * @return returns user input - 1 due to arraylist position starting at 0 but prints start at 1
+     */
     private <T extends HasDescription> T printMenuAndGetChoice(T[] choices) {
         int menu;
         int i = 1;
@@ -741,6 +765,11 @@ public class DungeonProgram {
                 System.out.println("Monsters doesn't exist");
         }
     }
+
+    /**
+     *
+     * @param time time input in thousands due to millisecond used to delay print, i.ex 1000 equals 1 second
+     */
 
     private void loadingTime(int time) {
         try {
