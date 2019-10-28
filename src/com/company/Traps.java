@@ -1,8 +1,12 @@
 package com.company;
 
+/**
+ * <h1>Different traps with event description</h1>
+ */
+
 public enum Traps {
     /**
-     * <h1>List of different traps with event description</h1>
+     * Trap description used to print event upon trap encounter
      */
     BOULDER("The hero gets hit by a rolling boulder"),
     SPIKE_TRAP("The hero steps on a brick that triggers spikes to emerge from the ground"),
