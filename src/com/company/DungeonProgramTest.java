@@ -6,9 +6,9 @@ import java.util.Random;
 import static org.junit.jupiter.api.Assertions.*;
 
 class DungeonProgramTest {
-    ArrayList<Monsters> monsters = new ArrayList<>();
-    ArrayList<LootOrTreasures.Treasure> lootOrTreasures = new ArrayList<>();
-    Random rand = new Random();
+    private ArrayList<Monsters> monsters = new ArrayList<>();
+    private ArrayList<LootOrTreasures.Treasure> lootOrTreasures = new ArrayList<>();
+    private Random rand = new Random();
 
     @org.junit.jupiter.api.Test
     void showLoot() {
