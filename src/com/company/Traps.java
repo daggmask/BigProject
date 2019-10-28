@@ -1,6 +1,9 @@
 package com.company;
 
 public enum Traps {
+    /**
+     * <h1>List of different traps with event description</h1>
+     */
     BOULDER("The hero gets hit by a rolling boulder"),
     SPIKE_TRAP("The hero steps on a brick that triggers spikes to emerge from the ground"),
     SWING_TRAP("The hero walks across a bridge in the dungeon and suddenly a large axe swings from the roof"),
