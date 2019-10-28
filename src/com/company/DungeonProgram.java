@@ -134,6 +134,7 @@ public class DungeonProgram {
             MonsterFactory.MonsterAffix monsterAffix = MonsterFactory.MonsterAffix.values()[rand.nextInt(MonsterFactory.MonsterAffix.values().length)];
             MonsterFactory.MonsterType monsterType = MonsterFactory.MonsterType.values()[rand.nextInt(MonsterFactory.MonsterType.values().length)];
             Monsters monster = new Monsters(monsterAffix.monsterAffix, monsterType.monsterType, tryCatchInt());
+            loadingTime(1000);
             System.out.print("Generating random items"); //Add random items
             loadDots();
             while (itemCount < MIN_ITEMS) {

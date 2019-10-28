@@ -145,11 +145,11 @@ public class Monsters extends Entity implements Comparable<Monsters>, Serializab
             this.intelligence = 10;
         }
         if (strength > dexterity && strength > intelligence) {
-            this.title = " Strong ";
+            this.title = "Strong ";
         } else if (dexterity > strength && dexterity > intelligence) {
-            this.title = " Fast ";
+            this.title = "Fast ";
         } else if (intelligence > strength && intelligence > dexterity) {
-            this.title = " Intelligent ";
+            this.title = "Intelligent ";
         }
         this.health = (int) Math.round(strength * (level * 1.5));
         this.mana = (int) Math.round(intelligence * (level * 1.2));
