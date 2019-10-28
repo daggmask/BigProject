@@ -291,6 +291,7 @@ public class DungeonProgram {
             dungeonTreasureValue += lootOrTreasures.lootValue;
         }
         System.out.println("Total dungeon treasure value: " + dungeonTreasureValue);
+        loadingTime(3000);
     }
 
     public void sortMonsters() {
@@ -385,6 +386,7 @@ public class DungeonProgram {
                 System.out.println("This sorting choice doesn't exist");
                 break;
         }
+        loadingTime(3000);
     }
     /**
      * <h1>Save or load monsters</h1>
@@ -475,6 +477,7 @@ public class DungeonProgram {
         System.out.println("Option 9 menu tool tip ");
         System.out.println("Option 10 battle the dungeon ");
         System.out.println("Option 11 exit ");
+        loadingTime(3000);
     }
 
     private void enterDungeon() {
